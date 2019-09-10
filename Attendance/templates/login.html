@@ -1,26 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="mt-2">Log in</h1>
+  <h1 class="mt-2">Login</h1>
   {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
   {% endif %}
   <form method="post">
     {% csrf_token %}
     <input  class="btn btn-primary" type="hidden" name="next" value="{{ next }}" />
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}<br>
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-        {% if field.help_text %}
-          <p><small style="color: grey">{{ field.help_text }}</small></p>
-        {% endif %}
-      </p>
-    {% endfor %}
+     {{ form|crispy }}
     <button class="btn btn-primary" type="submit">Log in</button>
-    <a  class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign up</a>
+    <a  class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign Up</a>
   </form>
 {% endblock %}
