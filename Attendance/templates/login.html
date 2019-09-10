@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-8">
+
   <h1 class="mt-2">Login</h1>
   {% if form.errors %}
     <p style="color: red">Your username and password didn't match. Please try again.</p>
@@ -22,7 +20,5 @@
     <button class="btn btn-primary" type="submit">Login</button>
     <a  class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign Up</a>
   </form>
-        </div>
-      </div>
-    </div>
+ 
 {% endblock %}
