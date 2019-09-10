@@ -11,14 +11,14 @@
   <form method="post">
     {% csrf_token %}
     <input  class="btn btn-primary" type="hidden" name="next" value="{{ next }}" />
-
-    <label for="id_username">Username:</label>
+     <div id = "div_id_username" class="form-group">
+    <label for="id_username"  class="col-form-label  requiredField">Username:</label>
     <input type="text" class="form-control" name="username" id="id_username">
-
-
-    <label for="id_password">Password:</label>
+  </div>
+  <div id = "div_id_password1" class="form-group">
+    <label for="id_password" class="col-form-label  requiredField">Password:</label>
     <input type="password" class="form-control" id="id_password" name='password' placeholder="Password">
-  
+  </div>
     <button class="btn btn-primary" type="submit">Login</button>
     <a  class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign Up</a>
   </form>
