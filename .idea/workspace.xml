@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Attendance/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/login.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,7 +81,7 @@
       <updated>1567936806692</updated>
       <workItem from="1567936889005" duration="6513000" />
       <workItem from="1567965887738" duration="2858000" />
-      <workItem from="1568103632996" duration="13683000" />
+      <workItem from="1568103632996" duration="13944000" />
     </task>
     <servers />
   </component>
