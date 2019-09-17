@@ -5,15 +5,10 @@
 {% block content %}
   <form method="post" novalidate>
     {% csrf_token %}
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    I am a
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Student</a>
-    <a class="dropdown-item" href="#">Teacher</a>
-  </div>
-  </div>
+<div class="dropdown-menu">
+  <a class="dropdown-item" href="#">I am a student</a>
+  <a class="dropdown-item active" href="#">I am a teacher</a>
+</div>
   <div id = "div_id_first_name" class="form-group">
     <label for="id_first_name"  class="col-form-label  requiredField">First name:</label>
     <input type="text" class="form-control" name="first_name" id="id_first_name">
