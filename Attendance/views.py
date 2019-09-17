@@ -12,6 +12,12 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            first_name = form.cleaned_data.get("first_name")
+            second_name = form.cleaned_data.get("second_name")
+            group = form.cleaned_data.get("group")
+            email = form.cleaned_data.get("email")
+            github = form.cleaned_data.get("github")
+
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
