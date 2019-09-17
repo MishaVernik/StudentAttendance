@@ -2,8 +2,12 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.contrib import messages
 import psycopg2
 from psycopg2 import Error
+
+from Attendance.forms import SignUpForm
+
 
 @login_required
 def home(request):
@@ -40,19 +44,24 @@ def add_student(first_name, second_name, group, email, github, username, passwor
 def signup(request):
     print(request)
     if request.method == 'POST':
-        #form = UserCreationForm(request.POST)
-        first_name = request.POST["first_name"]
-        second_name = request.POST["second_name"]
-        group = request.POST["group"]
-        email = request.POST["email"]
-        github = request.POST["github"]
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #student_or_teacher = request.POST.get('')
+            first_name = form.cleaned_data.get("first_name")
+            second_name = form.cleaned_data.get("last_name")
+            group = form.cleaned_data.get("group")
+            email = form.cleaned_data.get("email")
+            github = form.cleaned_data.get("github")
 
-        username = request.POST['username']
-        raw_password = request.POST['password1']
-       # user = authenticate(username=username, password=raw_password)
-        #login(request, user)
-        # TODO: add user into PostgreSQL
-        #add_student(first_name, second_name, group, email, github, username, raw_password)
-        return redirect('home')
-
-    return render(request, 'signup.html')
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            messages.success(request, f'Account created for {username}')
+            login(request, user)
+            # TODO: add user into PostgreSQL
+           # add_student(first_name, second_name, group, email, github, username, raw_password)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
