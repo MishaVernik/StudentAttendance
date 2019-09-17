@@ -16,15 +16,10 @@ def signup(request):
 
     print(request)
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             #student_or_teacher = request.POST.get('')
-            first_name = form.cleaned_data.get("first_name")
-            second_name = form.cleaned_data.get("last_name")
-            group = form.cleaned_data.get("group")
-            email = form.cleaned_data.get("email")
-            github = form.cleaned_data.get("github")
 
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -35,5 +30,5 @@ def signup(request):
            # add_student(first_name, second_name, group, email, github, username, raw_password)
             return redirect('home')
     else:
-        form = SignUpForm()
+        form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
