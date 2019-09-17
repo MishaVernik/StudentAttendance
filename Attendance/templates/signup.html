@@ -5,7 +5,37 @@
 {% block content %}
   <form method="post" novalidate>
     {% csrf_token %}
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    I am a
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Student</a>
+    <a class="dropdown-item" href="#">Teacher</a>
+  </div>
+  </div>
+  <div id = "div_id_first_name" class="form-group">
+    <label for="id_first_name"  class="col-form-label  requiredField">First name:</label>
+    <input type="text" class="form-control" name="first_name" id="id_first_name">
+  </div>
+  <div id = "div_id_second_name" class="form-group">
+    <label for="id_second_name"  class="col-form-label  requiredField">Second name:</label>
+    <input type="text" class="form-control" name="second_name" id="id_second_name">
+  </div>
+  <div id = "div_id_group" class="form-group">
+    <label for="id_group"  class="col-form-label  requiredField">Group:</label>
+    <input type="text" class="form-control" name="group" id="id_group">
+  </div>
+  <div id = "div_id_email" class="form-group">
+    <label for="id_email"  class="col-form-label  requiredField">Email:</label>
+    <input type="text" class="form-control" name="email" id="id_email">
+  </div>
+  <div id = "div_id_github" class="form-group">
+    <label for="id_github"  class="col-form-label">Github:</label>
+    <input type="text" class="form-control" name="github" id="id_github">
+  </div>
     {{ form|crispy }}
     <button type="submit" class="btn btn-success">Press on me baby</button>
   </form>
+
 {% endblock %}
