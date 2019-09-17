@@ -11,4 +11,4 @@ class SignUpForm(UserCreationForm):
     github = forms.CharField(max_length=254, required=False, help_text='Optional')
     class Meta:
         model = User
-        fields = ('username','first_name', 'last_name','email','group', 'password1', 'password2', )
+        fields = ('username','first_name', 'last_name','email','group','github', 'password1', 'password2', )
