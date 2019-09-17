@@ -3,12 +3,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <form method="post">
+  <form method="post" novalidate>
     {% csrf_token %}
-    {{ form.errors }}
-    {{ form.non_field_errors }}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Presswwww on me baby</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Press on me baby</button>
   </form>
 
 {% endblock %}
