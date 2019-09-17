@@ -12,7 +12,12 @@
       <div class="row justify-content-center">
         <div class="col-8">
           <h1 class="mt-2">KPI Student attendance</h1>
-             <header>
+            <header>
+                {% if request.get_full_path ==  "https://kpi-student-attendance.herokuapp.com/accounts/login/?next=/" %}
+                    <meta http-equiv="REFRESH" content="0;url=https://kpi-student-attendance.herokuapp.com/login/">
+                {% endif %}
+            </header>
+            <header>
               {% if user.is_authenticated %}
                   {% if request.path == "/login/"  or  request.path == "/signup/"%}
                    <meta http-equiv="REFRESH" content="0;url=https://kpi-student-attendance.herokuapp.com/">

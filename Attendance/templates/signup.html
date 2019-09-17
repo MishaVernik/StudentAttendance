@@ -5,28 +5,33 @@
 {% block content %}
   <form method="post" novalidate>
     {% csrf_token %}
-<div class="dropdown-menu">
-  <a class="dropdown-item" href="#">I am a student</a>
-  <a class="dropdown-item active" href="#">I am a teacher</a>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">I am a
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Student</a></li>
+    <li><a href="#">Teacher</a></li>
+    <li><a href="#">JS</a></li>
+  </ul>
 </div>
   <div id = "div_id_first_name" class="form-group">
-    <label for="id_first_name"  class="col-form-label  requiredField">First name:</label>
+    <label for="id_first_name"  class="col-form-label  requiredField">First name*</label>
     <input type="text" class="form-control" name="first_name" id="id_first_name">
   </div>
   <div id = "div_id_second_name" class="form-group">
-    <label for="id_second_name"  class="col-form-label  requiredField">Second name:</label>
+    <label for="id_second_name"  class="col-form-label  requiredField">Second name*</label>
     <input type="text" class="form-control" name="second_name" id="id_second_name">
   </div>
   <div id = "div_id_group" class="form-group">
-    <label for="id_group"  class="col-form-label  requiredField">Group:</label>
+    <label for="id_group"  class="col-form-label  requiredField">Group*</label>
     <input type="text" class="form-control" name="group" id="id_group">
   </div>
   <div id = "div_id_email" class="form-group">
-    <label for="id_email"  class="col-form-label  requiredField">Email:</label>
+    <label for="id_email"  class="col-form-label  requiredField">Email*</label>
     <input type="text" class="form-control" name="email" id="id_email">
   </div>
   <div id = "div_id_github" class="form-group">
-    <label for="id_github"  class="col-form-label">Github:</label>
+    <label for="id_github"  class="col-form-label">Github</label>
     <input type="text" class="form-control" name="github" id="id_github">
   </div>
     {{ form|crispy }}
