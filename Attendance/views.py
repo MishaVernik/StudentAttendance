@@ -43,7 +43,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            student_or_teacher = request.POST.get('')
+            #student_or_teacher = request.POST.get('')
             first_name = form.cleaned_data.get("first_name")
             second_name = form.cleaned_data.get("second_name")
             group = form.cleaned_data.get("group")
