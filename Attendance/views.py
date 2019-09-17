@@ -40,23 +40,19 @@ def add_student(first_name, second_name, group, email, github, username, passwor
 def signup(request):
     print(request)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            #student_or_teacher = request.POST.get('')
-            first_name = request.POST["first_name"]
-            second_name =  request.POST["second_name"]
-            group = request.POST["group"]
-            email = request.POST["email"]
-            github = request.POST["github"]
+        #form = UserCreationForm(request.POST)
+        first_name = request.POST["first_name"]
+        second_name = request.POST["second_name"]
+        group = request.POST["group"]
+        email = request.POST["email"]
+        github = request.POST["github"]
 
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            # TODO: add user into PostgreSQL
-            add_student(first_name, second_name, group, email, github, username, raw_password)
-            return redirect('home')
-    else:
-        form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+        username = request.POST['username']
+        raw_password = request.POST['password1']
+       # user = authenticate(username=username, password=raw_password)
+        #login(request, user)
+        # TODO: add user into PostgreSQL
+        #add_student(first_name, second_name, group, email, github, username, raw_password)
+        return redirect('home')
+
+    return render(request, 'signup.html')
