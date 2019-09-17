@@ -5,6 +5,8 @@
 {% block content %}
   <form method="post" novalidate>
     {% csrf_token %}
+    {{ form.errors }}
+    {{ form.non_field_errors }}
     {{ form|crispy }}
     <button type="submit" class="btn btn-success">Press on me baby</button>
   </form>
