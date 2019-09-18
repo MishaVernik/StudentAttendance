@@ -1,1 +1,1 @@
-'web: gunicorn StudentAttendance.wsgi --log-file -' 
+web: gunicorn StudentAttendance.wsgi:application --log-file -
