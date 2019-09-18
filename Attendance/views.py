@@ -16,7 +16,7 @@ def signup(request):
 
     print(request)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             #student_or_teacher = request.POST.get('')
@@ -30,5 +30,5 @@ def signup(request):
            # add_student(first_name, second_name, group, email, github, username, raw_password)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
