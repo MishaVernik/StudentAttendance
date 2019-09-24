@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Attendance/templates/signupTeacher.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/templates/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/signupStudent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Attendance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,12 +45,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Attendance/templates" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Projects\StudentAttendance\Attendance" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Projects\StudentAttendance\Attendance\templates" />
       <recent name="G:\Projects\StudentAttendance\templates" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\Projects\StudentAttendance\Attendance" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -102,7 +107,8 @@
       <workItem from="1568705551073" duration="17577000" />
       <workItem from="1568752995814" duration="110000" />
       <workItem from="1568753158834" duration="3727000" />
-      <workItem from="1568799461615" duration="2834000" />
+      <workItem from="1568799461615" duration="5167000" />
+      <workItem from="1569320012497" duration="3641000" />
     </task>
     <servers />
   </component>
