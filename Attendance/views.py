@@ -3,14 +3,44 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
 from Attendance.forms import SignUpStudentForm, SignUpTeacherForm
 import psycopg2
 from psycopg2 import Error
 
 @login_required
 def home(request):
+    print(request.user)
+    student_or_teacher = 0
+    try:
+        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
+                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
+                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
+                                      port="5432",
+                                      database="d8d34m4nml4iij")
+
+        cursor = connection.cursor()
+
+        postgreSQL_select_Query = "SELECT * FROM public.students WHERE username=%s"
+
+        cursor.execute(postgreSQL_select_Query, (request.user,))
+        print("Selecting rows from mobile table using cursor.fetchall")
+        mobile_records = cursor.fetchall()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error while doing smth in PostgreSQL", error)
+        student_or_teacher = 1
+    finally:
+        # closing database connection.
+        cursor.close()
+        connection.close()
+        print("PostgreSQL connection is closed")
+
+    if student_or_teacher == 1:
+        return render(request, 'homeTeacher.html')
     return render(request, 'home.html')
+
+@login_required
+def homeTeacher(request):
+    return render(request, 'homeTeacher.html')
 
 def add_student(first_name, second_name, group, email, github, username, password):
     try:
@@ -151,7 +181,8 @@ def signUpTeacher(request):
             login(request, user)
             # TODO: add user into PostgreSQL
             add_teacher(first_name, second_name, groups, email, faculty, username, raw_password)
-            return redirect('home')
+            print('#YES'*10)
+            return redirect('/accounts/profile/teacher/')
     else:
         form = SignUpTeacherForm()
     return render(request, 'signupTeacher.html', {'form': form})
