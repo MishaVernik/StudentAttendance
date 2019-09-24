@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class SignUpStudentForm(UserCreationForm):
-#####
+#######
     first_name = forms.CharField(max_length=30, required=True, help_text='First name')
     last_name = forms.CharField(max_length=30, required=True, help_text='Last name')
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
