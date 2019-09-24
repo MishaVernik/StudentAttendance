@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Attendance/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Attendance/templates/signupStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/signupStudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Attendance/templates/signupTeacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/signupTeacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StudentAttendance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentAttendance/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +101,7 @@
       <workItem from="1568752995814" duration="110000" />
       <workItem from="1568753158834" duration="3727000" />
       <workItem from="1568799461615" duration="5167000" />
-      <workItem from="1569320012497" duration="4284000" />
+      <workItem from="1569320012497" duration="4545000" />
     </task>
     <servers />
   </component>
