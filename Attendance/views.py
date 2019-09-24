@@ -9,6 +9,7 @@ from psycopg2 import Error
 
 @login_required
 def home(request):
+    print("HOME")
     print(request.user)
     student_or_teacher = 0
     try:
@@ -40,6 +41,13 @@ def home(request):
 
 @login_required
 def homeTeacher(request):
+    return render(request, 'homeTeacher.html')
+
+def getTeachersLocation(request):
+    print("POST STARTS")
+
+    print(request.POST)
+    print("POST ENDS")
     return render(request, 'homeTeacher.html')
 
 def add_student(first_name, second_name, group, email, github, username, password):

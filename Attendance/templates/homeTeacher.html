@@ -1,31 +1,40 @@
 {% extends 'base.html' %}
-
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-  <h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
-  <p>Your email address: {{ user.email }}</p>
-    <p id="showCoordinates"></p>
-    <button type="button" class="btn btn-info" onclick="getLocation()">Start Lecture</button>
-    <script>
-        var x = document.getElementById("showCoordinates");
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+   {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
+<p>Your email address: {{ user.email }}</p>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+   var data = "";
+   var token = '{{csrf_token}}';
+   function getLocation() {
+         if (navigator.geolocation) {
+           navigator.geolocation.getCurrentPosition(showPosition);
+         } else {
 
-        function getLocation() {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-          } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-        }
+         }
+       }
+       function showPosition(position) {
+           $.ajax({
+              headers: { "X-CSRFToken": token },
+              url: "",
+              type : "POST", // http method
+              data: {latitude : position.coords.latitude , longtitude : position.coords.longitude} ,
+              dataType: 'json',
+              success: function (data) {
+                if (data.is_taken) {
+                  alert(data.error_message);
+                }
+              }
+             });
+       }
 
-        function showPosition(position) {
-          x.innerHTML = "Latitude: " + position.coords.latitude +
-          "<br>Longitude: " + position.coords.longitude;
-        }
-    </script>
+</script>
+<button type="submit" class="btn btn-info" onclick="getLocation()">Start Lecture</button>
 {% endblock %}
