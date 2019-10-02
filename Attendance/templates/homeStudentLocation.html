@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+
 {% block content %}
-{% if messages %}
-{% for message in messages %}
-<div class="alert alert-{{ message.tags }}">
-   {{ message }}
-</div>
-{% endfor %}
-{% endif %}
-<h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
-<p>Your email address: {{ user.email }}</p>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+  <h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
+  <p>Your email address: {{ user.email }}</p>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
    var data = "";
    var token = '{{csrf_token}}';
@@ -24,7 +25,7 @@
        function showPosition(position) {
            $.ajax({
               headers: { "X-CSRFToken": token },
-              url: "/location/teacher/",
+              url: "/location/student/",
               type : "POST", // http method
               data: {latitude : position.coords.latitude , longitude : position.coords.longitude, email : email },
               dataType: 'json',
@@ -37,5 +38,5 @@
        }
 
 </script>
-<button type="submit" class="btn btn-info" onclick="getLocation()">Start Lecture</button>
+<button type="submit" class="btn btn-info" onclick="getLocation()">I'm here</button>
 {% endblock %}

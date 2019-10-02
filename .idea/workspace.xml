@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Attendance/scripts/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/templates/homeStudentLocation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Attendance/templates/homeTeacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/homeTeacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Attendance/templates/signupStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/signupStudent.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Attendance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Attendance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/views.py" afterDir="false" />
     </list>
@@ -34,6 +33,9 @@
     </expand>
     <select />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -45,12 +47,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Attendance/templates" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\Projects\StudentAttendance\Attendance" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Projects\StudentAttendance\Attendance\templates" />
       <recent name="G:\Projects\StudentAttendance\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Projects\StudentAttendance\Attendance" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -108,7 +110,8 @@
       <workItem from="1568752995814" duration="110000" />
       <workItem from="1568753158834" duration="3727000" />
       <workItem from="1568799461615" duration="5167000" />
-      <workItem from="1569320012497" duration="19799000" />
+      <workItem from="1569320012497" duration="21117000" />
+      <workItem from="1569961539011" duration="13000000" />
     </task>
     <servers />
   </component>
