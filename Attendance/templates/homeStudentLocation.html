@@ -25,7 +25,7 @@
        function showPosition(position) {
            $.ajax({
               headers: { "X-CSRFToken": token },
-              url: "https://kpi-student-attendance.herokuapp.com/location/student/",
+              url: "/location/student/",
               type : "POST", // http method
               data: {latitude : position.coords.latitude , longitude : position.coords.longitude, email : email },
               dataType: 'json',

@@ -479,7 +479,7 @@ def signupStudent(request):
             user = authenticate(username=username, password=raw_password)
             messages.success(request, f'Account created for {username}')
             login(request, user)
-            # TODO: add user into PostgreSQL
+            
             add_student(first_name, second_name, group, email, github, username, raw_password)
             return redirect('home')
     else:
