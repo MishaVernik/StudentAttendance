@@ -158,7 +158,7 @@ def home(request):
         return render(request, 'home.html')
     print("HERE")
 
-    return render(request, 'homeStudentLocation.html')
+    return render(request, 'home.html')
 
 @login_required
 def homeTeacher(request):
