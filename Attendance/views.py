@@ -30,6 +30,7 @@ def ifStudentOnTheLecture(student_id, dateOriginal, datePlus20):
 
             print("123123123123")
             if (date >= dateOriginal and date <= datePlus20):
+                return render('homeStudentLocation.html')
                 return True
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error ifStudentOnTheLecture while doing smth in PostgreSQL", error)
