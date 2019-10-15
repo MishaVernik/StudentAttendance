@@ -110,6 +110,7 @@ def home(request):
     print(teacher_id)
     print(student_id)
     # var place
+    testDate = datetime.now()
     datePlus20 = datetime.now()
     dateOriginal = datetime.now()
     latitude = ""
@@ -131,7 +132,8 @@ def home(request):
 
         print("Print TEACHERS COORDINATES each row and it's columns values")
         print(mobile_records)
-        print('$'*50)
+        print('134 ' + '$'*50)
+
 
         for row in mobile_records:
             teacher_id = row[0]
@@ -152,12 +154,12 @@ def home(request):
         print('1111111111111111111')
         return render(request, 'homeTeacher.html')
     present = datetime.now()
-    print(datePlus20)
 
-    if (present > datePlus20 or ifStudentOnTheLecture(student_id, dateOriginal, datePlus20)):
+    if (present > datePlus20 or ifStudentOnTheLecture(student_id, dateOriginal, datePlus20) or testDate + timedelta(minutes=20) == datePlus20):
         return render(request, 'home.html')
-    return render(request, 'homeStudentLocation.html')
+    print("HERE")
 
+    return render(request, 'homeStudentLocation.html')
 
 @login_required
 def homeTeacher(request):
@@ -247,6 +249,8 @@ def getStudentsLocation(request):
     dateOriginal = datetime.now()
     datePlus20 = datetime.now()
     # Get last teachers visit
+    latitude = 0
+    longitude = 0
     try:
         connection = psycopg2.connect(user="cqwhbabxmaxxqd",
                                       password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
@@ -479,7 +483,7 @@ def signupStudent(request):
             user = authenticate(username=username, password=raw_password)
             messages.success(request, f'Account created for {username}')
             login(request, user)
-            
+
             add_student(first_name, second_name, group, email, github, username, raw_password)
             return redirect('home')
     else:
