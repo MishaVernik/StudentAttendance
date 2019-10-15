@@ -30,7 +30,6 @@ def ifStudentOnTheLecture(student_id, dateOriginal, datePlus20):
 
             print("123123123123")
             if (date >= dateOriginal and date <= datePlus20):
-                return render('homeStudentLocation.html')
                 return True
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error ifStudentOnTheLecture while doing smth in PostgreSQL", error)
@@ -152,7 +151,6 @@ def home(request):
         connection.close()
         print("PostgreSQL TEACHERS COORDINATES connection is closed")
     if student_or_teacher == 1:
-        print('1111111111111111111')
         return render(request, 'homeTeacher.html')
     present = datetime.now()
 
