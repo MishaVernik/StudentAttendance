@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.contrib import messages
 from Attendance.forms import SignUpStudentForm, SignUpTeacherForm
 import psycopg2
@@ -41,6 +41,66 @@ def ifStudentOnTheLecture(student_id, dateOriginal, datePlus20):
         print("PostgreSQL ifStudentOnTheLecture connection is closed")
     return False
 
+def getLastTeachersDate():
+    try:
+        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
+                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
+                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
+                                      port="5432",
+                                      database="d8d34m4nml4iij")
+
+        cursor = connection.cursor()
+
+        postgreSQL_select_Query = "SELECT * from public.teachers_coordinates ORDER BY date DESC LIMIT 1;"
+
+        cursor.execute(postgreSQL_select_Query)
+        print("Selecting ifStudentOnTheLecture rows from mobile table using cursor.fetchall")
+        mobile_records = cursor.fetchall()
+        datePlus20 = datetime.now()
+        dateOriginal = datetime.now()
+        for row in mobile_records:
+            dateOriginal = datetime.strptime(row[0].split('.')[0], '%Y-%m-%d %H:%M:%S')
+
+        return [dateOriginal, dateOriginal + timedelta(minutes=20)]
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error ifStudentOnTheLecture while doing smth in PostgreSQL", error)
+        student_or_teacher = 1
+    finally:
+        # closing database connection.
+        cursor.close()
+        connection.close()
+        print("PostgreSQL ifStudentOnTheLecture connection is closed")
+    return ["",""]
+
+def countNumberOsStudents():
+    dates = getLastTeachersDate()
+    try:
+        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
+                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
+                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
+                                      port="5432",
+                                      database="d8d34m4nml4iij")
+
+        cursor = connection.cursor()
+
+        postgreSQL_select_Query = "SELECT COUNT(*) FROM public.attendance WHERE  date <= %s::date AND  date >= %s::date;"
+
+        cursor.execute(postgreSQL_select_Query, (dates[1]), (dates[0]))
+        print("Selecting ifStudentOnTheLecture rows from mobile table using cursor.fetchall")
+        mobile_records = cursor.fetchall()
+        number_of_students = 0
+        for row in mobile_records:
+            number_of_students = row[0]
+        return number_of_students
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error ifStudentOnTheLecture while doing smth in PostgreSQL", error)
+        student_or_teacher = 1
+    finally:
+        # closing database connection.
+        cursor.close()
+        connection.close()
+        print("PostgreSQL ifStudentOnTheLecture connection is closed")
+    return 0
 def getStudentsId(user1):
     student_id = 0
     try:
@@ -162,7 +222,13 @@ def home(request):
 
 @login_required
 def homeTeacher(request):
-    return render(request, 'homeTeacher.html')
+
+    # number = countNumberOsStudents()
+    # print("number : ", number)
+    # stu = {
+    #     "number": number
+    # }
+    return render(request, 'homeTeacher.html') #, stu)
 
 def calcLocationDiff(x1, y1, x2, y2):
     if (float(x1) - float(x2)) ** 2 + (float(y1)-float(y2))**2 < 100:
