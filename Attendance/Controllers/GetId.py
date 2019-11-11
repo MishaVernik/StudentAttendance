@@ -1,21 +1,15 @@
 import psycopg2
 
+from Attendance.Controllers.GetSQLConnection import get_sql_connection
 
-def getStudentsId(user1):
+
+def get_students_id(user1):
     student_id = 0
     try:
-        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
-                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
-                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
-                                      port="5432",
-                                      database="d8d34m4nml4iij")
-
+        connection = get_sql_connection()
         cursor = connection.cursor()
-
-        postgreSQL_select_Query = "SELECT student_id, username FROM public.students WHERE username=%s"
-
-        cursor.execute(postgreSQL_select_Query, (user1,))
-        print("Selecting STUDENTS rows from mobile table using cursor.fetchall")
+        postgre_sql_select_query = "SELECT student_id, username FROM public.students WHERE username=%s"
+        cursor.execute(postgre_sql_select_query, (user1,))
         mobile_records = cursor.fetchall()
         print(mobile_records)
         for row in mobile_records:
@@ -27,26 +21,16 @@ def getStudentsId(user1):
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL STUDENTS connection is closed")
-
     return student_id
 
 
-def getTeachersId(username):
+def get_teachers_id(username):
     teachers_id = 0
     try:
-        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
-                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
-                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
-                                      port="5432",
-                                      database="d8d34m4nml4iij")
-
+        connection = get_sql_connection()
         cursor = connection.cursor()
-
-        postgreSQL_select_Query = "SELECT * FROM public.teachers WHERE username=%s"
-
-        cursor.execute(postgreSQL_select_Query, (username,))
-        print("Selecting TEACHERS rows from mobile table using cursor.fetchall")
+        postgre_sql_select_query = "SELECT * FROM public.teachers WHERE username=%s"
+        cursor.execute(postgre_sql_select_query, (username,))
         mobile_records = cursor.fetchall()
         for row in mobile_records:
             teachers_id = row[0]

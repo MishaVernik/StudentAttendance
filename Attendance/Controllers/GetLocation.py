@@ -3,25 +3,22 @@ from datetime import datetime, timedelta
 import psycopg2
 from django.shortcuts import render
 
-from Attendance.Controllers.CheckIfStudentOnTheLecture import ifStudentOnTheLecture
-from Attendance.Controllers.GetId import getStudentsId
-from Attendance.Controllers.CalculateDistance import calcLocationDiff
+from Attendance.Controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
+from Attendance.Controllers.GetId import get_students_id
+from Attendance.Controllers.CalculateDistance import calculate_location_distance
+from Attendance.Controllers.GetSQLConnection import get_sql_connection
 
 
-def getTeachersLocation(request):
+def get_teachers_location(request):
     # Get teachers Id
     teacher_id = 0
     print(request.POST['email'])
     try:
-        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
-                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
-                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
-                                      port="5432",
-                                      database="d8d34m4nml4iij")
+        connection = get_sql_connection()
         cursor = connection.cursor()
         email = request.POST['email']
-        postgreSQL_select_Query = "SELECT * FROM public.teachers WHERE public.teachers.email=%s"
-        cursor.execute(postgreSQL_select_Query, (email,))
+        postgre_sql_select_query = "SELECT * FROM public.teachers WHERE public.teachers.email=%s"
+        cursor.execute(postgre_sql_select_query, (email,))
         mobile_records = cursor.fetchall()
         for row in mobile_records:
             teacher_id = row[0]
@@ -33,21 +30,16 @@ def getTeachersLocation(request):
         cursor.close()
         connection.close()
     try:
-        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
-                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
-                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
-                                      port="5432",
-                                      database="d8d34m4nml4iij")
 
+        connection = get_sql_connection()
         cursor = connection.cursor()
-
         create_table_query = ''' INSERT INTO public.teachers_coordinates(
                            teachers_id, "date", latitude, longitude)
                             VALUES (%s, %s, %s, %s);
                               '''
 
-        recordTuple = (teacher_id, datetime.now(), request.POST['latitude'], request.POST['longitude'])
-        cursor.execute(create_table_query, recordTuple)
+        record_tuple = (teacher_id, datetime.now(), request.POST['latitude'], request.POST['longitude'])
+        cursor.execute(create_table_query, record_tuple)
         connection.commit()
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while doing smth in PostgreSQL", error)
@@ -58,36 +50,32 @@ def getTeachersLocation(request):
 
     return render(request, 'homeTeacher.html')
 
-def getStudentsLocation(request):
+
+def get_students_location(request):
     # Get teachers Id
     print(request.user)
-    student_id = getStudentsId(str(request.user))
+    student_id = get_students_id(str(request.user))
     student_arr = []
 
-    dateOriginal = datetime.now()
-    datePlus20 = datetime.now()
+    date_original = datetime.now()
+    date_plus20 = datetime.now()
     # Get last teachers visit
     latitude = 0
     longitude = 0
     try:
-        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
-                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
-                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
-                                      port="5432",
-                                      database="d8d34m4nml4iij")
-
+        connection = get_sql_connection()
         cursor = connection.cursor()
-        postgreSQL_select_Query = "SELECT teachers_id, date, latitude, longitude FROM public.teachers_coordinates ORDER BY date DESC LIMIT 1"
-        cursor.execute(postgreSQL_select_Query)
+        postgre_sql_select_query = "SELECT teachers_id, date, latitude, longitude FROM public.teachers_coordinates ORDER BY date DESC LIMIT 1"
+        cursor.execute(postgre_sql_select_query)
         mobile_records = cursor.fetchall()
 
         for row in mobile_records:
             teacher_id = row[0]
             latitude = row[2]
             longitude = row[3]
-            dateOriginal = datetime.strptime(row[1].split('.')[0], '%Y-%m-%d %H:%M:%S')
-            datePlus20 = datetime.strptime(row[1].split('.')[0], '%Y-%m-%d %H:%M:%S')
-        datePlus20 = datePlus20 + timedelta(minutes=20)
+            date_original = datetime.strptime(row[1].split('.')[0], '%Y-%m-%d %H:%M:%S')
+            date_plus20 = datetime.strptime(row[1].split('.')[0], '%Y-%m-%d %H:%M:%S')
+        date_plus20 = date_plus20 + timedelta(minutes=20)
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error getStudentsLocation while doing smth in PostgreSQL", error)
     finally:
@@ -98,24 +86,19 @@ def getStudentsLocation(request):
     # Check with date now
     # Check location difference between
     present = datetime.now()
-    if present > datePlus20 or calcLocationDiff(request.POST['latitude'],request.POST['longitude'], latitude, longitude) == False or ifStudentOnTheLecture(student_id,dateOriginal,datePlus20):
+    if present > date_plus20 or calculate_location_distance(request.POST['latitude'], request.POST['longitude'], latitude,
+                                                            longitude) == False or if_student_on_the_lecture(student_id, date_original,
+                                                                                                             date_plus20):
         return render(request, 'home.html')
     try:
-        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
-                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
-                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
-                                      port="5432",
-                                      database="d8d34m4nml4iij")
-
+        connection = get_sql_connection()
         cursor = connection.cursor()
-
         create_table_query = ''' INSERT INTO public.attendance(
                           student_id, date, latitude, longitude)
                             VALUES (%s, %s, %s, %s);
                               '''
-
-        recordTuple = (student_id, datetime.now(), request.POST['latitude'], request.POST['longitude'],)
-        cursor.execute(create_table_query, recordTuple)
+        record_tuple = (student_id, datetime.now(), request.POST['latitude'], request.POST['longitude'],)
+        cursor.execute(create_table_query, record_tuple)
         connection.commit()
 
     except (Exception, psycopg2.DatabaseError) as error:

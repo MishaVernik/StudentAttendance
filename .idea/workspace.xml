@@ -2,16 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Attendance/AddNewUsers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Attendance/CalculateDistance.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Attendance/CheckIfStudentOnTheLecture.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Attendance/GetId.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Attendance/GetLocation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Attendance/GetNumberOfStudents.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Attendance/GetTeachersDate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/Controllers/GetSQLConnection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/Controllers/AddNewUsers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/Controllers/AddNewUsers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/Controllers/CalculateDistance.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/Controllers/CalculateDistance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/Controllers/CheckIfStudentOnTheLecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/Controllers/CheckIfStudentOnTheLecture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/Controllers/GetId.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/Controllers/GetId.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/Controllers/GetLocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/Controllers/GetLocation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/Controllers/GetNumberOfStudents.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/Controllers/GetNumberOfStudents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/Controllers/GetTeachersDate.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/Controllers/GetTeachersDate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Attendance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Attendance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StudentAttendance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentAttendance/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +43,13 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -54,12 +63,13 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Projects\StudentAttendance\Attendance\Controllers" />
+      <recent name="G:\Projects\StudentAttendance\Attendance" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Projects\StudentAttendance\Attendance\templates" />
       <recent name="G:\Projects\StudentAttendance\templates" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\Projects\StudentAttendance\Attendance" />
     </key>
   </component>
   <component name="RunDashboard">

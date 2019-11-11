@@ -1,23 +1,16 @@
 import psycopg2
 
-from Attendance.Controllers.GetTeachersDate import getLastTeachersDate
+from Attendance.Controllers.GetSQLConnection import get_sql_connection
+from Attendance.Controllers.GetTeachersDate import get_last_teachers_date
 
 
-def countNumberOsStudents():
-    dates = getLastTeachersDate()
+def count_number_os_students():
+    dates = get_last_teachers_date()
     try:
-        connection = psycopg2.connect(user="cqwhbabxmaxxqd",
-                                      password="a3063dc5aeec69b41564cd0f1e3c698e0ff9653385f3b87c0f113b70951eb5b3",
-                                      host="ec2-54-235-92-244.compute-1.amazonaws.com",
-                                      port="5432",
-                                      database="d8d34m4nml4iij")
-
+        connection = get_sql_connection()
         cursor = connection.cursor()
-
-        postgreSQL_select_Query = "SELECT COUNT(*) FROM public.attendance WHERE  date <= %s::date AND  date >= %s::date;"
-
-        cursor.execute(postgreSQL_select_Query, (dates[1]), (dates[0]))
-        print("Selecting ifStudentOnTheLecture rows from mobile table using cursor.fetchall")
+        postgre_sql_select_query = "SELECT COUNT(*) FROM public.attendance WHERE  date <= %s::date AND  date >= %s::date;"
+        cursor.execute(postgre_sql_select_query, (dates[1]), (dates[0]))
         mobile_records = cursor.fetchall()
         number_of_students = 0
         for row in mobile_records:
