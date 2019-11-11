@@ -3,9 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Attendance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StudentAttendance/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/StudentAttendance/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Attendance/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/templates/homeTeacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/templates/homeTeacher.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker" beforeDir="false" afterPath="$PROJECT_DIR$/Docker" afterDir="false" />
+>>>>>>> 0afc7f21189e396d77670072b2508db1fc376e3c
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
