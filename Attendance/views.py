@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from Attendance.AddNewUsers import add_student, add_teacher
-from Attendance.CheckIfStudentOnTheLecture import ifStudentOnTheLecture
-from Attendance.GetId import getStudentsId, getTeachersId
+from Attendance.Controllers.AddNewUsers import add_student, add_teacher
+from Attendance.Controllers.CheckIfStudentOnTheLecture import ifStudentOnTheLecture
+from Attendance.Controllers.GetId import getStudentsId, getTeachersId
 from Attendance.forms import SignUpStudentForm, SignUpTeacherForm
 import psycopg2
 from datetime import datetime, timedelta

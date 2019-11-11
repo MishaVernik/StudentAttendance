@@ -1,6 +1,6 @@
 import psycopg2
 
-from Attendance.GetTeachersDate import getLastTeachersDate
+from Attendance.Controllers.GetTeachersDate import getLastTeachersDate
 
 
 def countNumberOsStudents():

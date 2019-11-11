@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 import psycopg2
 from django.shortcuts import render
 
-from Attendance.CheckIfStudentOnTheLecture import ifStudentOnTheLecture
-from Attendance.GetId import getStudentsId
-from Attendance.CalculateDistance import calcLocationDiff
+from Attendance.Controllers.CheckIfStudentOnTheLecture import ifStudentOnTheLecture
+from Attendance.Controllers.GetId import getStudentsId
+from Attendance.Controllers.CalculateDistance import calcLocationDiff
 
 
 def getTeachersLocation(request):
