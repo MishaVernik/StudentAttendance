@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ef5008a-ffe7-4ef0-b4de-5f2d90b55830" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Attendance/AddNewUsers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/CalculateDistance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/CheckIfStudentOnTheLecture.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/GetId.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/GetLocation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/GetNumberOfStudents.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Attendance/GetTeachersDate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attendance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Attendance/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
