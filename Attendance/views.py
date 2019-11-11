@@ -46,8 +46,8 @@ def home(request):
         return render(request, 'homeTeacher.html')
     present = datetime.now()
 
-    if present > date_plus20 or if_student_on_the_lecture(student_id, date_original,
-                                                          date_plus20) or test_date + timedelta(
+    if (present > date_plus20) or if_student_on_the_lecture(student_id, date_original,
+                                                            date_plus20) or test_date + timedelta(
             minutes=20) == date_plus20:
         return render(request, 'home.html')
     return render(request, 'homeStudentLocation.html')
@@ -59,7 +59,6 @@ def home_teacher(request):
 
 
 def sign_up_teacher(request):
-    print(request)
     if request.method == 'POST':
         form = SignUpTeacherForm(request.POST)
         if form.is_valid():
