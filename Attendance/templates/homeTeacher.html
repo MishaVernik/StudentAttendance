@@ -38,7 +38,15 @@
 
 </script>
 <button type="submit" class="btn btn-info" onclick="getLocation()">Start Lecture</button>
-<h4>Number of students:
-    {{ number}}
-</h4>
+    <h4>
+    {% for st in students %}
+        <p> Number of students:  {{st}}</p>
+    {% endfor %}
+    </h4>
+    <table>
+    {% for elem in content %}
+        <p>{{elem}}</p>
+    {% endfor %}
+    </table>
+
 {% endblock %}

@@ -16,7 +16,7 @@ def get_last_teachers_date():
         date_plus20 = datetime.now()
         date_original = datetime.now()
         for row in mobile_records:
-            date_original = datetime.strptime(row[0].split('.')[0], '%Y-%m-%d %H:%M:%S')
+            date_original = datetime.strptime(row[3].split('.')[0], '%Y-%m-%d %H:%M:%S')
 
         return [date_original, date_original + timedelta(minutes=20)]
     except (Exception, psycopg2.DatabaseError) as error:

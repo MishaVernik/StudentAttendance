@@ -6,12 +6,17 @@ from Attendance.Controllers.GetTeachersDate import get_last_teachers_date
 
 def count_number_os_students():
     dates = get_last_teachers_date()
+    print(dates)
     try:
         connection = get_sql_connection()
+
         cursor = connection.cursor()
-        postgre_sql_select_query = "SELECT COUNT(*) FROM public.attendance WHERE  date <= %s::date AND  date >= %s::date;"
-        cursor.execute(postgre_sql_select_query, (dates[1]), (dates[0]))
+
+        postgre_sql_select_query = "SELECT COUNT(*) FROM public.attendance WHERE date::date BETWEEN  %s::date AND  %s::date;"
+        cursor.execute(postgre_sql_select_query, (dates[1], dates[0]),)
+
         mobile_records = cursor.fetchall()
+
         number_of_students = 0
         for row in mobile_records:
             number_of_students = row[0]
