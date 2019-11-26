@@ -1,3 +1,6 @@
+import json
+from builtins import Exception, str
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -6,7 +9,7 @@ from django.contrib import messages
 from Attendance.Controllers.AddNewUsers import add_student, add_teacher
 from Attendance.Controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
 from Attendance.Controllers.GetId import get_students_id, get_teachers_id
-from Attendance.Controllers.GetNumberOfStudents import count_number_os_students
+from Attendance.Controllers.GetNumberOfStudents import count_number_os_students, Student, StudentEncoder
 from Attendance.Controllers.GetSQLConnection import get_sql_connection
 from Attendance.forms import SignUpStudentForm, SignUpTeacherForm
 import psycopg2
@@ -15,7 +18,6 @@ from datetime import datetime, timedelta
 
 @login_required
 def home(request):
-
     # var place
     student_id = get_students_id(str(request.user))
     teacher_id = get_teachers_id(str(request.user))
@@ -30,7 +32,8 @@ def home(request):
     try:
         connection = get_sql_connection()
         cursor = connection.cursor()
-        postgre_sql_select_query = "SELECT teachers_id, date, latitude, longitude FROM public.teachers_coordinates ORDER BY date DESC LIMIT 1"
+        postgre_sql_select_query = "SELECT teachers_id, date, latitude, longitude FROM public.teachers_coordinates " \
+                                   "ORDER BY date DESC LIMIT 1 "
         cursor.execute(postgre_sql_select_query)
         mobile_records = cursor.fetchall()
         for row in mobile_records:
@@ -45,16 +48,17 @@ def home(request):
         cursor.close()
         connection.close()
     if student_or_teacher == 1:
-        content = [' '] #convert_lst_to_dict()
+        content = [' ']  # convert_lst_to_dict()
         st = count_number_os_students()
-        return render(request, 'homeTeacher.html', {'content': content, 'students' : [st]})
+        return render(request, 'homeTeacher.html', {'content': content, 'students': [st]})
 
     present = datetime.now()
     if (present > date_plus20) or if_student_on_the_lecture(student_id, date_original,
                                                             date_plus20) or test_date + timedelta(
-            minutes=20) == date_plus20:
+        minutes=20) == date_plus20:
         return render(request, 'home.html')
     return render(request, 'homeStudentLocation.html')
+
 
 def convert_lst_to_dict(lst):
     res_dict = {}
@@ -63,14 +67,24 @@ def convert_lst_to_dict(lst):
         print(el, cnt)
         el = el + '-' + str(cnt)
         res_dict[el] = cnt
-    #res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
+    # res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
     return res_dict
+
 
 @login_required
 def home_teacher(request):
     content = [' ']  # convert_lst_to_dict()
     st = count_number_os_students()
-    return render(request, 'homeTeacher.html', {'content': content, 'students': [st]})
+    print('#'*40)
+    json_st = []
+    for el in st:
+        json_st.append(el.number)
+        json_st.append(el.first_name + " " + el.second_name)
+        json_st.append(el.latitude)
+        json_st.append(el.longitude)
+
+    print(json.dumps(json_st))
+    return render(request, 'homeTeacher.html', {'content': [len(st),], 'students': st, "json_st": json.dumps(json_st)})
 
 
 def sign_up_teacher(request):

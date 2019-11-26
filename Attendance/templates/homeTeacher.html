@@ -2,14 +2,20 @@
 {% block content %}
 {% if messages %}
 {% for message in messages %}
+{% endfor %}
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"
+          type="text/javascript"></script>
+
+ <div id="map" style="width: 500px; height: 400px;"></div>
+
 <div class="alert alert-{{ message.tags }}">
    {{ message }}
 </div>
-{% endfor %}
-{% endif %}
 <h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
 <p>Your email address: {{ user.email }}</p>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <script>
    var data = "";
    var token = '{{csrf_token}}';
@@ -36,17 +42,71 @@
              });
        }
 
+     var obj = $.parseJSON('{{json_st | safe}}');
+     console.log(obj);
+     var locations = new Array(parseInt(obj.length / 4));
+     for (j = 0; j < locations.length; j++){
+         locations[j] = [obj[1 + 4*j], obj[2+ 4*j], obj[3 + 4*j], obj[4*j].toString()];
+     }
+     console.log();
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 60,
+      center: new google.maps.LatLng(locations[0][1], locations[0][2]),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {
+    console.log(locations[i][1] + " " + i + "  " + locations[i][2]);
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(parseFloat(locations[i][1]), parseFloat(locations[i][2])),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
 </script>
 <button type="submit" class="btn btn-info" onclick="getLocation()">Start Lecture</button>
-    <h4>
-    {% for st in students %}
-        <p> Number of students:  {{st}}</p>
-    {% endfor %}
-    </h4>
-    <table>
+<h4><br>
+<table>
     {% for elem in content %}
-        <p>{{elem}}</p>
+        <p>Number of students : {{elem}}</p>
+    {% endfor %}
+</table>
+</h4>
+
+<h4><br><br>
+    <table   border="2">
+        <tr>
+            <th>Number</th>
+            <th>First Name</th>
+            <th>Second name</th>
+            <th>Group</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Date</th>
+        </tr>
+
+        {% for student in students %}
+        <tr>
+            <th>{{student.number}}</th>
+            <th>{{student.first_name}}</th>
+            <th>{{student.second_name}}</th>
+            <th>{{student.group}}</th>
+            <th>{{student.latitude}}</th>
+            <th>{{student.longitude}}</th>
+            <th>{{student.date}}</th>
+        </tr>
     {% endfor %}
     </table>
-
+    </h4>
 {% endblock %}
