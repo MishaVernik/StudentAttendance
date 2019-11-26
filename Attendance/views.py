@@ -48,9 +48,17 @@ def home(request):
         cursor.close()
         connection.close()
     if student_or_teacher == 1:
-        content = [' ']  # convert_lst_to_dict()
         st = count_number_os_students()
-        return render(request, 'homeTeacher.html', {'content': content, 'students': [st]})
+        print('#'*40)
+        json_st = []
+        for el in st:
+            json_st.append(el.number)
+            json_st.append(el.first_name + " " + el.second_name)
+            json_st.append(el.latitude)
+            json_st.append(el.longitude)
+
+        print(json.dumps(json_st))
+        return render(request, 'homeTeacher.html', {'content': [len(st),], 'students': st, "json_st": json.dumps(json_st)})
 
     present = datetime.now()
     if (present > date_plus20) or if_student_on_the_lecture(student_id, date_original,
