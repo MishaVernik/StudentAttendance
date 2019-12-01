@@ -47,7 +47,7 @@ def home(request):
         # closing database connection.
         cursor.close()
         connection.close()
-    if student_or_teacher == 1: 
+    if student_or_teacher == 1:
         st = count_number_os_students()
         print('#'*40)
         json_st = []
