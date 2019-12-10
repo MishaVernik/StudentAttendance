@@ -34,11 +34,16 @@ def get_teachers_location(request):
         connection = get_sql_connection()
         cursor = connection.cursor()
         create_table_query = ''' INSERT INTO public.teachers_coordinates(
-                           teachers_id, "date", latitude, longitude)
-                            VALUES (%s, %s, %s, %s);
+                           teachers_id, "date", latitude, longitude, groups, subject, semester)
+                            VALUES (%s, %s, %s, %s, %s, %s, %s);
                               '''
-
-        record_tuple = (teacher_id, datetime.now(), request.POST['latitude'], request.POST['longitude'])
+        print(request.POST.getlist('group[]'))
+        groups = ','.join(request.POST.getlist('groups[]'))
+        print('-' * 50)
+        print(groups)
+        print('-' * 50)
+        record_tuple = (teacher_id, datetime.now(), request.POST['latitude'], request.POST['longitude'],
+                        groups, request.POST.get('subject'), int(str(request.POST.get('semester')).split()[1]))
         cursor.execute(create_table_query, record_tuple)
         connection.commit()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -65,7 +70,8 @@ def get_students_location(request):
     try:
         connection = get_sql_connection()
         cursor = connection.cursor()
-        postgre_sql_select_query = "SELECT teachers_id, date, latitude, longitude FROM public.teachers_coordinates ORDER BY date DESC LIMIT 1"
+        postgre_sql_select_query = "SELECT teachers_id, date, latitude, longitude FROM public.teachers_coordinates " \
+                                   "ORDER BY date DESC LIMIT 1 "
         cursor.execute(postgre_sql_select_query)
         mobile_records = cursor.fetchall()
 
@@ -86,8 +92,10 @@ def get_students_location(request):
     # Check with date now
     # Check location difference between
     present = datetime.now()
-    if present > date_plus20 or calculate_location_distance(request.POST['latitude'], request.POST['longitude'], latitude,
-                                                            longitude) == False or if_student_on_the_lecture(student_id, date_original,
+    if present > date_plus20 or calculate_location_distance(request.POST['latitude'], request.POST['longitude'],
+                                                            latitude,
+                                                            longitude) == False or if_student_on_the_lecture(student_id,
+                                                                                                             date_original,
                                                                                                              date_plus20):
         return render(request, 'home.html')
     try:

@@ -4,7 +4,7 @@
 {% for message in messages %}
 {% endfor %}
 {% endif %}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://maps.google.com/maps/api/js?sensor=false"
           type="text/javascript"></script>
@@ -22,19 +22,46 @@
    var data = "";
    var token = '{{csrf_token}}';
    var email = '{{user.email}}';
+   var groups = [];
+   var semester = "";
+   var  subject = "";
    function getLocation() {
          if (navigator.geolocation) {
-           navigator.geolocation.getCurrentPosition(showPosition);
+
+             var eGroups = document.getElementById("groups");
+             for ( var i = 0, len = eGroups.options.length; i < len; i++ ) {
+                opt = eGroups.options[i];
+                if ( opt.selected === true ) {
+                   groups.push(opt.value || opt.text);
+                }
+               //s += eGroups.options[eGroups.selectedIndex + i].value + " ";
+             }
+
+             var eSemester = document.getElementById("semester");
+             semester = eSemester.options[eSemester.selectedIndex].text;
+             var eSubject = document.getElementById("subject");
+             subject = eSubject.options[eSubject.selectedIndex].text;
+             navigator.geolocation.getCurrentPosition(showPosition);
          } else {
 
          }
        }
+
+
        function showPosition(position) {
+          alert(groups.length);
            $.ajax({
               headers: { "X-CSRFToken": token },
               url: "/location/teacher/",
               type : "POST", // http method
-              data: {latitude : position.coords.latitude , longitude : position.coords.longitude, email : email },
+              data: {
+                latitude : position.coords.latitude ,
+                longitude : position.coords.longitude,
+                email : email,
+                groups : groups,
+                subject : subject,
+                semester : semester
+                },
               dataType: 'json',
               success: function (data) {
                 if (data.is_taken) {
@@ -51,7 +78,7 @@
          locations[j] = [obj[1 + 4*j], obj[2+ 4*j], obj[3 + 4*j], obj[4*j].toString()];
      }
      console.log();
-
+    if ( locations.length > 0)
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 60,
       center: new google.maps.LatLng(locations[0][1], locations[0][2]),
@@ -90,23 +117,23 @@
     <tr>
         <td>
             <span class="label label-info">Select semester</span>
-            <select title="Select semester" class="selectpicker" >
+            <select title="Select semester" class="selectpicker" id="semester">
                   {% for i in '123456789'|make_list %}
-                        <option value="India">Semester   {{ forloop.counter }} </option>
+                        <option>Semester   {{ forloop.counter }} </option>
                       {% endfor %}
             </select>
         </td>
         <td>
             <span class="label label-info">Select subject</span>
-            <select title="Select subject" class="selectpicker">
+            <select title="Select subject" class="selectpicker" id="subject">
                   {% for subject in subjects %}
-                        <option value="India"> {{ subject }} </option>
+                        <option> {{ subject }} </option>
                       {% endfor %}
             </select>
         </td>
         <td>
             <span class="label label-info">Select Groups</span>
-            <select class="selectpicker" multiple data-live-search="true">
+            <select class="selectpicker" multiple data-live-search="true" id="groups">
                 {% for group in groups %}
                     <option> {{ group }} </option>
                 {% endfor %}

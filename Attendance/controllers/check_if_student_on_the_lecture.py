@@ -5,7 +5,7 @@ import psycopg2
 from Attendance.controllers.get.sql_connection import get_sql_connection
 
 
-def if_student_on_the_lecture(student_id, dateOriginal, datePlus20):
+def if_student_on_the_lecture(student_id, date_original, date_plus20):
     try:
         connection = get_sql_connection()
         cursor = connection.cursor()
@@ -17,7 +17,7 @@ def if_student_on_the_lecture(student_id, dateOriginal, datePlus20):
         for row in mobile_records:
             student_id = row[0]
             date = datetime.strptime(row[1].split('.')[0], '%Y-%m-%d %H:%M:%S')
-            if dateOriginal <= date <= datePlus20:
+            if date_original <= date <= date_plus20:
                 return True
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error ifStudentOnTheLecture while doing smth in PostgreSQL", error)

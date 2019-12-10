@@ -3,13 +3,13 @@ import psycopg2
 from Attendance.controllers.get.sql_connection import get_sql_connection
 
 
-def get_students_id(user1):
+def get_students_id(user):
     student_id = 0
     try:
         connection = get_sql_connection()
         cursor = connection.cursor()
         postgre_sql_select_query = "SELECT student_id, username FROM public.students WHERE username=%s"
-        cursor.execute(postgre_sql_select_query, (user1,))
+        cursor.execute(postgre_sql_select_query, (user,))
         mobile_records = cursor.fetchall()
         print(mobile_records)
         for row in mobile_records:

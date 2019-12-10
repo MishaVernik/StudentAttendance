@@ -4,7 +4,7 @@ from json import JSONEncoder
 import psycopg2
 
 from Attendance.controllers.get.sql_connection import get_sql_connection
-from Attendance.controllers.get.teachers_date import get_last_teachers_date
+from Attendance.controllers.get.teachers_date import last_teachers_date
 
 
 class StudentEncoder(json.JSONEncoder):
@@ -85,8 +85,10 @@ class Student(JSONEncoder):
 
 
 def count_number_os_students():
-    dates = get_last_teachers_date()
+    dates = last_teachers_date()
+    groups = dates[2]
     print(dates)
+    print(groups)
     students = []
     try:
         connection = get_sql_connection()
@@ -94,15 +96,20 @@ def count_number_os_students():
         postgres_sql_select_query = 'SELECT att.student_id, att.date, att.latitude, att.longitude, st.first_name, ' \
                                     'st.second_name, st."group" FROM public.attendance as att INNER JOIN ' \
                                     'public.students as st ON ' \
-                                    'st.student_id=att.student_id AND att.date::date BETWEEN  %s::date AND  ' \
-                                    '%s::date; '
-        print(postgres_sql_select_query)
-        cursor.execute(postgres_sql_select_query, (dates[1], dates[0]), )
+                                    'st.student_id=att.student_id AND att.date::timestamp  BETWEEN  %s::timestamp  ' \
+                                    'AND  ' \
+                                    '%s::timestamp  AND  %s LIKE ' + '\'%%\' ' + '|| st."group" || ' + '\'%%\'; '
+        print(dates[1])
+        record_tuple = (dates[0], dates[1], groups)
+        cursor.execute(postgres_sql_select_query, record_tuple)
 
         mobile_records = cursor.fetchall()
         number_of_students = 0
-        print(mobile_records)
 
+        print('^' * 40)
+        print(mobile_records)
+        print('^' * 40)
+        print(postgres_sql_select_query)
         for row in mobile_records:
             st = Student()
             st.number = number_of_students + 1
@@ -116,11 +123,11 @@ def count_number_os_students():
             students.append(st)
 
     except (Exception, psycopg2.DatabaseError) as error:
-        print("Error ifStudentOnTheLecture while doing smth in PostgreSQL", error)
+        print("Error count_number_os_students while doing smth in PostgreSQL", error)
         student_or_teacher = 1
     finally:
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL ifStudentOnTheLecture connection is closed")
+        print("PostgreSQL count_number_os_students connection is closed")
     return students
