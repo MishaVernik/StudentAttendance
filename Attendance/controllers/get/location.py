@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 import psycopg2
 from django.shortcuts import render
 
-from Attendance.controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
+from Attendance.controllers.check_if_student_on_the_lecture import if_student_on_the_lecture
 from Attendance.controllers.get.id import get_students_id
-from Attendance.controllers.CalculateDistance import calculate_location_distance
+from Attendance.controllers.calculate_distance import calculate_location_distance
 from Attendance.controllers.get.sql_connection import get_sql_connection
 
 
@@ -48,7 +48,7 @@ def get_teachers_location(request):
         cursor.close()
         connection.close()
 
-    return render(request, 'homeTeacher.html')
+    return render(request, 'home_teacher.html')
 
 
 def get_students_location(request):

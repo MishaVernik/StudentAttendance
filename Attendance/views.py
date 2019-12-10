@@ -7,7 +7,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from Attendance.controllers.add.new_users import add_student, add_teacher
-from Attendance.controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
+from Attendance.controllers.check_if_student_on_the_lecture import if_student_on_the_lecture
+from Attendance.controllers.get.all_groups import groups, group_ids
+from Attendance.controllers.get.all_subjects import subjects_many
 from Attendance.controllers.get.id import get_students_id, get_teachers_id
 from Attendance.controllers.get.number_of_students import count_number_os_students
 from Attendance.controllers.get.sql_connection import get_sql_connection
@@ -57,15 +59,22 @@ def home(request):
             json_st.append(el.latitude)
             json_st.append(el.longitude)
 
-        print(json.dumps(json_st))
-        return render(request, 'homeTeacher.html', {'content': [len(st),], 'students': st, "json_st": json.dumps(json_st)})
+        teacher_id = get_teachers_id(str(request.user))
+        all_groups = groups(teacher_id)
+        all_subjects = subjects_many(group_ids(teacher_id))
+        print("-" * 40)
+        print(all_subjects)
+        print("-" * 40)
+        return render(request, 'home_teacher.html',
+                      dict(content=[len(st), ], students=st, json_st=json.dumps(json_st), groups=all_groups,
+                           subjects=all_subjects))
 
     present = datetime.now()
     if (present > date_plus20) or if_student_on_the_lecture(student_id, date_original,
                                                             date_plus20) or test_date + timedelta(
         minutes=20) == date_plus20:
         return render(request, 'home.html')
-    return render(request, 'homeStudentLocation.html')
+    return render(request, 'home_student_location.html')
 
 
 def convert_lst_to_dict(lst):
@@ -91,8 +100,15 @@ def home_teacher(request):
         json_st.append(el.latitude)
         json_st.append(el.longitude)
 
-    print(json.dumps(json_st))
-    return render(request, 'homeTeacher.html', {'content': [len(st),], 'students': st, "json_st": json.dumps(json_st)})
+    teacher_id = get_teachers_id(str(request.user))
+    all_groups = groups(teacher_id)
+    all_subjects = subjects_many(group_ids(teacher_id))
+    print("-" * 40)
+    print(all_subjects)
+    print("-" * 40)
+    return render(request, 'home_teacher.html',
+                  dict(content=[len(st), ], students=st, json_st=json.dumps(json_st), groups=all_groups,
+                       subjects=all_subjects))
 
 
 def sign_up_teacher(request):
@@ -117,7 +133,7 @@ def sign_up_teacher(request):
             return redirect('/accounts/profile/teacher/')
     else:
         form = SignUpTeacherForm()
-    return render(request, 'signupTeacher.html', {'form': form})
+    return render(request, 'signup_teacher.html', {'form': form})
 
 
 def signup_student(request):
@@ -141,4 +157,4 @@ def signup_student(request):
             return redirect('home')
     else:
         form = SignUpStudentForm()
-    return render(request, 'signupStudent.html', {'form': form})
+    return render(request, 'signup_student.html', {'form': form})
