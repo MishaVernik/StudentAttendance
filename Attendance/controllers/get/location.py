@@ -3,14 +3,14 @@ from datetime import datetime, timedelta
 import psycopg2
 from django.shortcuts import render
 
-from Attendance.Controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
-from Attendance.Controllers.Get.id import get_students_id
-from Attendance.Controllers.CalculateDistance import calculate_location_distance
-from Attendance.Controllers.Get.sql_connection import get_sql_connection
+from Attendance.controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
+from Attendance.controllers.get.id import get_students_id
+from Attendance.controllers.CalculateDistance import calculate_location_distance
+from Attendance.controllers.get.sql_connection import get_sql_connection
 
 
 def get_teachers_location(request):
-    # Get teachers Id
+    # get teachers Id
     teacher_id = 0
     print(request.POST['email'])
     try:
@@ -52,14 +52,14 @@ def get_teachers_location(request):
 
 
 def get_students_location(request):
-    # Get teachers Id
+    # get teachers Id
     print(request.user)
     student_id = get_students_id(str(request.user))
     student_arr = []
 
     date_original = datetime.now()
     date_plus20 = datetime.now()
-    # Get last teachers visit
+    # get last teachers visit
     latitude = 0
     longitude = 0
     try:

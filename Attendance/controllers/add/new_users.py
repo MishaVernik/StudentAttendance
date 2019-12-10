@@ -1,6 +1,6 @@
 import psycopg2
 
-from Attendance.Controllers.Get.sql_connection import get_sql_connection
+from Attendance.controllers.get.sql_connection import get_sql_connection
 
 
 def add_student(first_name, second_name, group, email, github, username, password):

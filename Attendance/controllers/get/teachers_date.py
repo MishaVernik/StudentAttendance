@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 import psycopg2
 
-from Attendance.Controllers.Get.sql_connection import get_sql_connection
+from Attendance.controllers.get.sql_connection import get_sql_connection
 
 
 def get_last_teachers_date():

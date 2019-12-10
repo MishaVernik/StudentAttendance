@@ -3,8 +3,8 @@ from json import JSONEncoder
 
 import psycopg2
 
-from Attendance.Controllers.Get.sql_connection import get_sql_connection
-from Attendance.Controllers.Get.teachers_date import get_last_teachers_date
+from Attendance.controllers.get.sql_connection import get_sql_connection
+from Attendance.controllers.get.teachers_date import get_last_teachers_date
 
 
 class StudentEncoder(json.JSONEncoder):

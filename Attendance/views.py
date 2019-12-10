@@ -6,11 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from Attendance.Controllers.Add.new_users import add_student, add_teacher
-from Attendance.Controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
-from Attendance.Controllers.Get.id import get_students_id, get_teachers_id
-from Attendance.Controllers.Get.number_of_students import count_number_os_students
-from Attendance.Controllers.Get.sql_connection import get_sql_connection
+from Attendance.controllers.add.new_users import add_student, add_teacher
+from Attendance.controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
+from Attendance.controllers.get.id import get_students_id, get_teachers_id
+from Attendance.controllers.get.number_of_students import count_number_os_students
+from Attendance.controllers.get.sql_connection import get_sql_connection
 from Attendance.forms import SignUpStudentForm, SignUpTeacherForm
 import psycopg2
 from datetime import datetime, timedelta

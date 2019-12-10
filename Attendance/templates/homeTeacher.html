@@ -4,6 +4,7 @@
 {% for message in messages %}
 {% endfor %}
 {% endif %}
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://maps.google.com/maps/api/js?sensor=false"
           type="text/javascript"></script>
@@ -12,7 +13,10 @@
 <div class="alert alert-{{ message.tags }}">
    {{ message }}
 </div>
-<h2>Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
+
+<button type="submit" class="btn btn-success" onclick="addGroup()">Add Group</button>
+<button type="submit" class="btn btn-success" onclick="addSubject()">Add Subject</button>
+<h4>Welcome, {{ user.get_full_name }}<br>Username: <small>{{ user.username }}</small></h4>
 <p>Your email address: {{ user.email }}</p>
 
 <script>
@@ -75,6 +79,7 @@
     }
 </script>
 <button type="submit" class="btn btn-info" onclick="getLocation()">Start Lecture</button>
+<button type="submit" class="btn btn-warning" onclick="finishLecture()">Finish Lecture</button>
 <h4><br>
 <table>
     {% for elem in content %}
@@ -82,7 +87,37 @@
     {% endfor %}
 </table>
 </h4>
+<table>
+    <tr>
+        <td>
+            <span class="label label-info">Select semester</span>
+            <select title="Select semester" class="selectpicker" >
+                  {% for i in '123456789'|make_list %}
+                        <option value="India">Semester   {{ forloop.counter }} </option>
+                      {% endfor %}
+            </select>
+        </td>
+        <td>
+            <span class="label label-info">Select subject</span>
+            <select title="Select subject" class="selectpicker">
+                  {% for i in '123456789'|make_list %}
+                        <option value="India">Subject   {{ forloop.counter }} </option>
+                      {% endfor %}
+            </select>
+        </td>
+        <td>
+            <span class="label label-info">Select Groups</span>
+            <select class="selectpicker" multiple data-live-search="true">
+                {% for i in '123456789'|make_list %}
+                    <option>Group   {{ forloop.counter }} </option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+</table>
+<!-- Basic dropdown -->
 
+<!-- Basic dropdown -->
 <h4><br><br>
     <table   border="2">
         <tr>
