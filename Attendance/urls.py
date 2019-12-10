@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
-import Attendance.Controllers.Get.GetLocation
+import Attendance.Controllers.Get.location
 from . import views
 
 
@@ -14,8 +14,8 @@ urlpatterns = [
     #url(r'^login/$', django.contrib.auth.views.LoginView, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(next_page="login"), name='logout'),
     url(r'^signup/teacher/$', views.sign_up_teacher, name='signupTeacher'),
-    url(r'^location/student/$', Attendance.Controllers.Get.GetLocation.get_students_location, name='locationStudent'),
-    url(r'^location/teacher/$', Attendance.Controllers.Get.GetLocation.get_teachers_location, name='locationTeacher'),
+    url(r'^location/student/$', Attendance.Controllers.Get.location.get_students_location, name='locationStudent'),
+    url(r'^location/teacher/$', Attendance.Controllers.Get.location.get_teachers_location, name='locationTeacher'),
     url(r'^signup/$', views.signup_student, name='signupStudent'),
    # url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     #    views.activate, name='activate'),

@@ -2,7 +2,7 @@ from datetime import datetime
 
 import psycopg2
 
-from Attendance.Controllers.Get.GetSQLConnection import get_sql_connection
+from Attendance.Controllers.Get.sql_connection import get_sql_connection
 
 
 def if_student_on_the_lecture(student_id, dateOriginal, datePlus20):
