@@ -118,10 +118,18 @@
 <br>
 <button type="button" class="btn btn-info">Show table</button>
 <button type="button" class="btn btn-info">Import to .CSV</button>
-<button type="submit" class="btn btn-info" onclick="addGroup()">Add Group</button>
-<button type="submit" class="btn btn-info" onclick="addSubject()">Add Subject</button>
-<!-- Show table-->
 <br><br>
+<form method="POST" action="{% url 'addGroup' %}">
+   {% csrf_token %}
+    <button type="submit" class="btn btn-info" type="submit">Add Group</button>
+</form>
+<br>
+<form method="POST" action="{% url 'addSubject' %}">
+   {% csrf_token %}
+    <button type="submit" class="btn btn-info" type="submit">Add Subject</button>
+</form>
+<!-- Show table-->
+<br>
     <table class="table table-sm"  border="2">
     <h4>
         <tr>

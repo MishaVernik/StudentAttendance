@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% if messages %}
+{% for message in messages %}
+{% endfor %}
+{% endif %}
+{% block content %}
+<form method="POST" action="{% url 'home' %}">
+   {% csrf_token %}
+    <button type="submit" class="btn btn-info" type="submit">Back</button>
+</form>
+<table>
+    <tr>
+        <td>
+            <span class="label label-info">Select semester</span>
+            <select title="Select semester" class="selectpicker" >
+                  {% for i in '123456789'|make_list %}
+                        <option value="India">Semester   {{ forloop.counter }} </option>
+                      {% endfor %}
+            </select>
+        </td>
+        <td>
+            <span class="label label-info">Select Groups</span>
+            <select class="selectpicker" multiple data-live-search="true">
+                {% for group in groups %}
+                    <option> {{ group }} </option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+</table>
+{% endblock %}
