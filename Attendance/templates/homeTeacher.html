@@ -14,8 +14,7 @@
    {{ message }}
 </div>
 
-<button type="submit" class="btn btn-success" onclick="addGroup()">Add Group</button>
-<button type="submit" class="btn btn-success" onclick="addSubject()">Add Subject</button>
+
 <h4>Welcome, {{ user.get_full_name }}<br>Username: <small>{{ user.username }}</small></h4>
 <p>Your email address: {{ user.email }}</p>
 
@@ -119,6 +118,8 @@
 <br>
 <button type="button" class="btn btn-info">Show table</button>
 <button type="button" class="btn btn-info">Import to .CSV</button>
+<button type="submit" class="btn btn-info" onclick="addGroup()">Add Group</button>
+<button type="submit" class="btn btn-info" onclick="addSubject()">Add Subject</button>
 <!-- Show table-->
 <br><br>
     <table class="table table-sm"  border="2">
