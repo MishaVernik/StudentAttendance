@@ -4,28 +4,46 @@
 {% endfor %}
 {% endif %}
 {% block content %}
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <form method="POST" action="{% url 'home' %}">
    {% csrf_token %}
     <button type="submit" class="btn btn-info" type="submit">Back</button>
 </form>
-<table>
-    <tr>
-        <td>
-            <span class="label label-info">Select semester</span>
-            <select title="Select semester" class="selectpicker" >
-                  {% for i in '123456789'|make_list %}
-                        <option value="India">Semester   {{ forloop.counter }} </option>
-                      {% endfor %}
-            </select>
-        </td>
-        <td>
-            <span class="label label-info">Select Groups</span>
-            <select class="selectpicker" multiple data-live-search="true">
-                {% for group in groups %}
-                    <option> {{ group }} </option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-</table>
+
+<form method="POST" action="{% url 'addSubject' %}">
+    <table>
+        <tr>
+            <td>
+                <span>Select semester</span><br>
+                <select title="Select semester" class="selectpicker" name="semester">
+                      {% for i in '12345678'|make_list %}
+                            <option>Semester   {{ forloop.counter }} </option>
+                          {% endfor %}
+                </select>
+            </td>
+            <td>
+                <span>Select Groups</span><br>
+                <select class="selectpicker" multiple data-live-search="true" name="groups">
+                    {% for group in groups %}
+                        <option> {{ group }} </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <div class="form-group">
+              <label for="usr">Subject</label>
+              <input type="text" class="form-control" id="usr"  name="subject">
+            </div>
+            <span class="label label-info">ex: SQL</span>
+            <br>
+        </tr>
+    </table>
+    {% csrf_token %}
+    <br>
+    <button type="submit" class="btn btn-success" type="submit">Save</button>
+</form>
+
 {% endblock %}

@@ -106,6 +106,12 @@ def home_teacher(request):
     print("-" * 40)
     print(all_subjects)
     print("-" * 40)
+
+    set_all_groups = set(all_groups)
+    set_all_subjects = set(all_subjects)
+    all_groups = list(set_all_groups)
+    all_subjects = list(set_all_subjects)
+
     return render(request, 'home_teacher.html',
                   dict(content=[len(st), ], students=st, json_st=json.dumps(json_st), groups=all_groups,
                        subjects=all_subjects))

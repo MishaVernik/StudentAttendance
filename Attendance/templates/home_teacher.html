@@ -119,12 +119,12 @@
 <button type="button" class="btn btn-info">Show table</button>
 <button type="button" class="btn btn-info">Import to .CSV</button>
 <br><br>
-<form method="POST" action="{% url 'addGroup' %}">
+<form method="POST" action="{% url 'groupIndex' %}">
    {% csrf_token %}
     <button type="submit" class="btn btn-info" type="submit">Add Group</button>
 </form>
 <br>
-<form method="POST" action="{% url 'addSubject' %}">
+<form method="POST" action="{% url 'subjectIndex' %}">
    {% csrf_token %}
     <button type="submit" class="btn btn-info" type="submit">Add Subject</button>
 </form>
