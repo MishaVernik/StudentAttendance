@@ -4,9 +4,9 @@ import psycopg2
 from django.shortcuts import render
 
 from Attendance.Controllers.CheckIfStudentOnTheLecture import if_student_on_the_lecture
-from Attendance.Controllers.GetId import get_students_id
+from Attendance.Controllers.Get.GetId import get_students_id
 from Attendance.Controllers.CalculateDistance import calculate_location_distance
-from Attendance.Controllers.GetSQLConnection import get_sql_connection
+from Attendance.Controllers.Get.GetSQLConnection import get_sql_connection
 
 
 def get_teachers_location(request):
