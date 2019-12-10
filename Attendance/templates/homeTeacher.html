@@ -115,11 +115,14 @@
         </td>
     </tr>
 </table>
-<!-- Basic dropdown -->
-
-<!-- Basic dropdown -->
-<h4><br><br>
-    <table   border="2">
+<!-- Show table -->
+<br>
+<button type="button" class="btn btn-info">Show table</button>
+<button type="button" class="btn btn-info">Import to .CSV</button>
+<!-- Show table-->
+<br><br>
+    <table class="table table-sm"  border="2">
+    <h4>
         <tr>
             <th>Number</th>
             <th>First Name</th>
@@ -129,7 +132,7 @@
             <th>Longitude</th>
             <th>Date</th>
         </tr>
-
+    </h4>
         {% for student in students %}
         <tr>
             <th>{{student.number}}</th>
@@ -142,5 +145,5 @@
         </tr>
     {% endfor %}
     </table>
-    </h4>
+
 {% endblock %}
