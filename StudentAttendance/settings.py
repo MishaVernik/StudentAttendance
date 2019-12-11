@@ -30,6 +30,8 @@ ALLOWED_HOSTS = ['*', '.herokuapp.com', 'localhost', '127.0.0.1', '[::1]']
 # Application definition
 
 INSTALLED_APPS = [
+
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,8 +126,8 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-
 django_heroku.settings(locals())
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #  add configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

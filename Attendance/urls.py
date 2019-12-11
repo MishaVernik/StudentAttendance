@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
 import Attendance.controllers.get.location
+from Attendance.controllers import show_table, import_to_csv
 from Attendance.controllers.add import group, subject
 from . import views
 
@@ -22,6 +23,8 @@ urlpatterns = [
     url(r'^addGroup/$', group.add_group, name='addGroup'),
     url(r'^subject/$', subject.index, name='subjectIndex'),
     url(r'^addSubject/$', subject.add_subject, name='addSubject'),
+    url(r'^showTable/$', show_table.index, name='showTable'),
+    url(r'^importToCSV/$', import_to_csv.index, name='importToCSV'),
    # url(r'^a.ctivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     #    views.activate, name='activate'),
 ]

@@ -143,18 +143,36 @@
 </table>
 <!-- Show table -->
 <br>
-<button type="button" class="btn btn-info">Show table</button>
-<button type="button" class="btn btn-info">Import to .CSV</button>
-<br><br>
-<form method="POST" action="{% url 'groupIndex' %}">
-   {% csrf_token %}
-    <button type="submit" class="btn btn-info" type="submit">Add Group</button>
-</form>
-<br>
-<form method="POST" action="{% url 'subjectIndex' %}">
-   {% csrf_token %}
-    <button type="submit" class="btn btn-info" type="submit">Add Subject</button>
-</form>
+<table>
+    <tr>
+
+    <td>
+    <form method="POST" action="{% url 'showTable' %}">
+        {% csrf_token %}
+        <button type="button" class="btn btn-info" type="submit">Show table</button>
+    </form>
+    </td>
+     <td>
+        <form method="POST" action="{% url 'importToCSV' %}">
+            {% csrf_token %}
+            <button type="button" class="btn btn-info">Import to .CSV</button>
+        </form>
+     </td>
+    <td>
+        <form method="POST" action="{% url 'groupIndex' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-info" type="submit">Add Group</button>
+        </form>
+    </td>
+    <td>
+        <form method="POST" action="{% url 'subjectIndex' %}">
+           {% csrf_token %}
+            <button type="submit" class="btn btn-info" type="submit">Add Subject</button>
+        </form>
+    </td>
+    </tr>
+</table>
+
 <!-- Show table-->
 <br>
     <table class="table table-sm"  border="2">
