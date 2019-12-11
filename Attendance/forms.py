@@ -1,11 +1,15 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
 from django.contrib.auth.models import User
 
 
 
 class SignUpStudentForm(UserCreationForm):
 #########
+    password = ReadOnlyPasswordHashField(label= ("Password"),
+        help_text= ("Raw passwords are not stored, so there is no way to see "
+                    "this user's password, but you can change the password "
+                    "using <a href=\"password/\">this form</a>."))
     first_name = forms.CharField(max_length=30, required=True, help_text='First name')
     last_name = forms.CharField(max_length=30, required=True, help_text='Last name')
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
@@ -17,6 +21,10 @@ class SignUpStudentForm(UserCreationForm):
 
 class SignUpTeacherForm(UserCreationForm):
 
+    password = ReadOnlyPasswordHashField(label=("Password"),
+                                         help_text=("Raw passwords are not stored, so there is no way to see "
+                                                    "this user's password, but you can change the password "
+                                                    "using <a href=\"password/\">this form</a>."))
     first_name = forms.CharField(max_length=30, required=True, help_text='First name')
     last_name = forms.CharField(max_length=30, required=True, help_text='Last name')
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
