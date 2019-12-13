@@ -3,33 +3,28 @@ from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashFiel
 from django.contrib.auth.models import User
 
 
-
 class SignUpStudentForm(UserCreationForm):
-#########
-    password = ReadOnlyPasswordHashField(label= ("Password"),
-        help_text= ("Raw passwords are not stored, so there is no way to see "
-                    "this user's password, but you can change the password "
-                    "using <a href=\"password/\">this form</a>."))
+    #########
+
     first_name = forms.CharField(max_length=30, required=True, help_text='First name')
     last_name = forms.CharField(max_length=30, required=True, help_text='Last name')
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
     group = forms.CharField(max_length=10, required=True, help_text='Your group (ex: КВ-71)')
     github = forms.CharField(max_length=254, required=False, help_text='Optional')
+
     class Meta:
         model = User
-        fields = ['username','first_name', 'last_name','email','group','github', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'group', 'github', 'password1', 'password2']
+
 
 class SignUpTeacherForm(UserCreationForm):
 
-    password = ReadOnlyPasswordHashField(label=("Password"),
-                                         help_text=("Raw passwords are not stored, so there is no way to see "
-                                                    "this user's password, but you can change the password "
-                                                    "using <a href=\"password/\">this form</a>."))
     first_name = forms.CharField(max_length=30, required=True, help_text='First name')
     last_name = forms.CharField(max_length=30, required=True, help_text='Last name')
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Inform a valid email address.')
     groups = forms.CharField(max_length=254, required=True, help_text='Groups (ex: КВ-71, KB-72, ..)')
     faculty = forms.CharField(max_length=254, required=False, help_text='Optional')
+
     class Meta:
         model = User
-        fields = ['username','first_name', 'last_name','email','groups','faculty', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'groups', 'faculty', 'password1', 'password2']
