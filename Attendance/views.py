@@ -22,6 +22,8 @@ from Attendance.get.latest_teachers_date import get_latest_teachers_date
 
 @login_required
 def home(request):
+    from Attendance.get.all_teachers_dates import all_dates
+    dd = all_dates(91, 'Algorithms', 5, "Kv-71,КВ-71,KB-71,kv-71")
     # var place
     student_id = get_students_id(str(request.user))
     teacher_id = get_teachers_id(str(request.user))
