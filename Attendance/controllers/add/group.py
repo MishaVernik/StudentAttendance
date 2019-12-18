@@ -5,7 +5,7 @@ from Attendance.controllers.add.subject import insert_into_subjects
 from Attendance.controllers.get.all_groups import groups, group_ids
 from Attendance.controllers.get.all_subjects import subjects_many
 from Attendance.controllers.get.id import get_teachers_id
-from Attendance.controllers.get.sql_connection import get_sql_connection
+from Attendance.context.sql_connection import get_sql_connection
 
 
 def index(request):

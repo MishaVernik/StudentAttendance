@@ -23,8 +23,8 @@ urlpatterns = [
     url(r'^addGroup/$', group.add_group, name='addGroup'),
     url(r'^subject/$', subject.index, name='subjectIndex'),
     url(r'^addSubject/$', subject.add_subject, name='addSubject'),
-    url(r'^showTable/$', show_table.index, name='showTable'),
-    url(r'^importToCSV/$', import_to_csv.index, name='importToCSV'),
+    url(r'^showTable/$', show_table.show_table, name='showTable'),
+    url(r'^importToCSV/$', import_to_csv.download_csv, name='importToCSV'),
    # url(r'^a.ctivate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     #    views.activate, name='activate'),
 ]

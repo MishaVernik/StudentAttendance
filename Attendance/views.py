@@ -22,8 +22,6 @@ from Attendance.get.latest_teachers_date import get_latest_teachers_date
 
 @login_required
 def home(request):
-    from Attendance.get.all_teachers_dates import all_dates
-    dd = all_dates(91, 'Algorithms', 5, "Kv-71,КВ-71,KB-71,kv-71")
     # var place
     student_id = get_students_id(str(request.user))
     teacher_id = get_teachers_id(str(request.user))
@@ -58,9 +56,10 @@ def home(request):
 
         all_groups = list(dict.fromkeys(all_groups))
         all_subjects = list(dict.fromkeys(all_subjects))
+        # print('-'*400)
         return render(request, 'home_teacher.html',
                       dict(content=[len(st), ], students=st, json_st=json.dumps(json_st), groups=all_groups,
-                           subjects=all_subjects))
+                           subjects=all_subjects, state=[2]))
 
     present = datetime.now()
     if (present > date_plus20) or if_student_on_the_lecture(student_id, date_original,
@@ -107,7 +106,7 @@ def home_teacher(request):
 
     return render(request, 'home_teacher.html',
                   dict(content=[len(st), ], students=st, json_st=json.dumps(json_st), groups=all_groups,
-                       subjects=all_subjects))
+                       subjects=all_subjects, state=[2]))
 
 
 def sign_up_teacher(request):

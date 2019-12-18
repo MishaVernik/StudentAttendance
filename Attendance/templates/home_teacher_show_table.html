@@ -30,7 +30,7 @@
         groups = [];
         semester = "";
         subject = "";
-        //alert(groups.length);
+        alert(groups.length);
          var eGroups = document.getElementById("groups");
          for ( var i = 0, len = eGroups.options.length; i < len; i++ ) {
             opt = eGroups.options[i];
@@ -44,10 +44,9 @@
          semester = eSemester.options[eSemester.selectedIndex].text;
          var eSubject = document.getElementById("subject");
          subject = eSubject.options[eSubject.selectedIndex].text;
-         alert(3);
        $.ajax({
           headers: { "X-CSRFToken": token },
-          url: "http://127.0.0.1:8000/showTable/",
+          url: "/showTable/",
           type : "POST", // http method
           data: {
             email : email,
@@ -55,77 +54,15 @@
             subject : subject,
             semester : semester
             },
-          dataType: 'html',
+          dataType: 'json',
           success: function (data) {
-            // alert(1);
-            var received = JSON.parse(JSON.stringify(data));
-             $("html").html(data);
-            //console.log(data);
-            if (data.is_taken) {
-              alert(response.error_message);
-            }
-          }
-         });
-   }
-    function downloadCSV(){
-        groups = [];
-        semester = "";
-        subject = "";
-        //alert(groups.length);
-         var eGroups = document.getElementById("groups");
-         for ( var i = 0, len = eGroups.options.length; i < len; i++ ) {
-            opt = eGroups.options[i];
-            if ( opt.selected === true ) {
-               groups.push(opt.value || opt.text);
-            }
-           //s += eGroups.options[eGroups.selectedIndex + i].value + " ";
-         }
-
-         var eSemester = document.getElementById("semester");
-         semester = eSemester.options[eSemester.selectedIndex].text;
-         var eSubject = document.getElementById("subject");
-         subject = eSubject.options[eSubject.selectedIndex].text;
-         alert(3);
-       $.ajax({
-          headers: { "X-CSRFToken": token },
-          url: "/importToCSV/",
-          type : "POST", // http method
-          data: {
-            email : email,
-            groups : groups,
-            subject : subject,
-            semester : semester
-            },
-          dataType: 'html',
-           error: function (jqXHR, exception) {
-           alert(1);
-            var msg = '';
-            if (jqXHR.status === 0) {
-                msg = 'Not connect.\n Verify Network.';
-            } else if (jqXHR.status == 404) {
-                msg = 'Requested page not found. [404]';
-            } else if (jqXHR.status == 500) {
-                msg = 'Internal Server Error [500].';
-            } else if (exception === 'parsererror') {
-                msg = 'Requested JSON parse failed.';
-            } else if (exception === 'timeout') {
-                msg = 'Time out error.';
-            } else if (exception === 'abort') {
-                msg = 'Ajax request aborted.';
-            } else {
-                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-            }
-            // $('#post').html(msg);
-            alert(msg);
-        },
-          success: function (data) {
-            alert(2);
             if (data.is_taken) {
               alert(data.error_message);
             }
           }
          });
    }
+
    function getLocation() {
          if (navigator.geolocation) {
             groups = [];
@@ -152,7 +89,7 @@
 
 
        function showPosition(position) {
-         // alert(groups.length);
+          alert(groups.length);
            $.ajax({
               headers: { "X-CSRFToken": token },
               url: "/location/teacher/",
@@ -216,58 +153,66 @@
     {% endfor %}
 </table>
 </h4>
-<table>
-    <tr>
-        <td>
-            <span class="label label-info">Select semester</span>
-            <select title="Select semester" class="selectpicker" id="semester">
-                  {% for i in '123456789'|make_list %}
-                        <option>Semester   {{ forloop.counter }} </option>
-                      {% endfor %}
-            </select>
-        </td>
-        <td>
-            <span class="label label-info">Select subject</span>
-            <select title="Select subject" class="selectpicker" id="subject" >
-                  {% for subject in subjects %}
-                        <option> {{ subject }} </option>
-                      {% endfor %}
-            </select>
-        </td>
-        <td>
-            <span class="label label-info">Select Groups</span>
-            <select class="selectpicker" multiple data-live-search="true" id="groups">
-                {% for group in groups %}
-                    <option> {{ group }} </option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-</table>
+<form method="POST" action="{% url 'showTable' %}">
+    <table>
+        <tr>
+            <td>
+                <span class="label label-info">Select semester</span>
+                <select title="Select semester" class="selectpicker" id="semester">
+                      {% for i in '123456789'|make_list %}
+                            <option>Semester   {{ forloop.counter }} </option>
+                          {% endfor %}
+                </select>
+            </td>
+            <td>
+                <span class="label label-info">Select subject</span>
+                <select title="Select subject" class="selectpicker" id="subject" >
+                      {% for subject in subjects %}
+                            <option> {{ subject }} </option>
+                          {% endfor %}
+                </select>
+            </td>
+            <td>
+                <span class="label label-info">Select Groups</span>
+                <select class="selectpicker" multiple data-live-search="true" id="groups">
+                    {% for group in groups %}
+                        <option> {{ group }} </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {% csrf_token %}
+                <button type="button" class="btn btn-info" type="submit">Show table</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-info" type="submit">Import to .CSV</button>
+            </td>
+        </tr>
+    </table>
+</form>
 <!-- Show table -->
 <br>
 <table>
     <tr>
-        <td>
-            <button type="button" class="btn btn-info" onclick="showTable()">Show table</button>
-        </td>
-         <td>
-             <button type="button" class="btn btn-info" onclick="downloadCSV()">Import to .CSV</button>
-         </td>
-        <td>
-            <form method="POST" action="{% url 'groupIndex' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-info" type="submit">Add Group</button>
-            </form>
-        </td>
-        <td>
-            <form method="POST" action="{% url 'subjectIndex' %}">
-               {% csrf_token %}
-                <button type="submit" class="btn btn-info" type="submit">Add Subject</button>
-            </form>
-        </td>
+
+    <td>
+        <form method="POST" action="{% url 'groupIndex' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-info" type="submit">Add Group</button>
+        </form>
+    </td>
+    <td>
+        <form method="POST" action="{% url 'subjectIndex' %}">
+           {% csrf_token %}
+            <button type="submit" class="btn btn-info" type="submit">Add Subject</button>
+        </form>
+    </td>
     </tr>
 </table>
+
 <!-- Show table-->
 <br>
     <table class="table table-sm"  border="2">

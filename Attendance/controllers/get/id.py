@@ -1,6 +1,6 @@
 import psycopg2
 
-from Attendance.controllers.get.sql_connection import get_sql_connection
+from Attendance.context.sql_connection import get_sql_connection
 
 
 def get_students_id(user):
