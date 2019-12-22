@@ -47,7 +47,7 @@
          alert(3);
        $.ajax({
           headers: { "X-CSRFToken": token },
-          url: "http://127.0.0.1:8000/showTable/",
+          url: "/showTable/",
           type : "POST", // http method
           data: {
             email : email,
