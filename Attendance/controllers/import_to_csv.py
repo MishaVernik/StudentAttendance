@@ -60,7 +60,7 @@ def download_csv(request):
         from Attendance.controllers.show_table import intersection_between_2_groups_bool
         if intersection_between_2_groups_bool(group1=lecture[1], group2=lst_groups):
             # adds new date to the 'cols'
-            cols.append(lecture[0])
+
             #print('cols:', cols)
             from Attendance.controllers.show_table import students_on_lecture
             current_students_on_lecture = students_on_lecture(lecture[0], lecture[1])
@@ -74,6 +74,7 @@ def download_csv(request):
                         if not is_changed:
                             is_changed = True
                             current += 1
+                            cols.append(lecture[0])
 
             for student, arr in students_table.items():
                 if len(arr) != current:
@@ -86,13 +87,13 @@ def download_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
 
-    response.write(u'\ufeff'.encode('utf8'))
+    #response.write(u'\ufeff'.encode('utf8'))
     # with open('innovators.csv', 'w', newline='') as file:
     writer = csv.writer(response, delimiter=';')
     writer.writerow(cols)
     for student, attendance in students_table.items():
         #print(student, attendance)
         tmp = attendance
-        tmp.insert(0, student.encode("utf-8"))
+        tmp.insert(0, student)
         writer.writerow(tmp)
     return response
