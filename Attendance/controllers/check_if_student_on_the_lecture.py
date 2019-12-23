@@ -12,7 +12,7 @@ def if_student_on_the_lecture(student_id, date_original, date_plus20):
         postgre_sql_select_query = "SELECT * FROM public.attendance WHERE student_id=%s"
 
         cursor.execute(postgre_sql_select_query, (student_id,))
-        print("Selecting ifStudentOnTheLecture rows from mobile table using cursor.fetchall")
+        #print("Selecting ifStudentOnTheLecture rows from mobile table using cursor.fetchall")
         mobile_records = cursor.fetchall()
         for row in mobile_records:
             student_id = row[0]
@@ -26,5 +26,5 @@ def if_student_on_the_lecture(student_id, date_original, date_plus20):
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL ifStudentOnTheLecture connection is closed")
+        #print("PostgreSQL ifStudentOnTheLecture connection is closed")
     return False

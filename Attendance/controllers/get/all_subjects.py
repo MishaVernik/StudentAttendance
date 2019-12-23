@@ -10,7 +10,7 @@ def subjects_one(schedule_id):
         connection = get_sql_connection()
         cursor = connection.cursor()
         postgre_sql_select_query = 'SELECT id, subject  FROM public.subjects WHERE schedule_id=%s'
-        print(postgre_sql_select_query)
+        #print(postgre_sql_select_query)
         cursor.execute(postgre_sql_select_query, (schedule_id,))
         mobile_records = cursor.fetchall()
         for row in mobile_records:
@@ -34,7 +34,7 @@ def subjects_many(schedule_ids):
             connection = get_sql_connection()
             cursor = connection.cursor()
             postgre_sql_select_query = 'SELECT id, subject  FROM public.subjects WHERE schedule_id=%s'
-            print(postgre_sql_select_query)
+            #print(postgre_sql_select_query)
             cursor.execute(postgre_sql_select_query, (schedule_id,))
             mobile_records = cursor.fetchall()
             for row in mobile_records:

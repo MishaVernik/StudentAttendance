@@ -9,7 +9,7 @@ def group_ids(teacher_id):
         connection = get_sql_connection()
         cursor = connection.cursor()
         postgre_sql_select_query = 'SELECT id, "group"  FROM public.schedule WHERE teacher_id=%s'
-        print(postgre_sql_select_query)
+        #print(postgre_sql_select_query)
         cursor.execute(postgre_sql_select_query, (teacher_id,))
         mobile_records = cursor.fetchall()
         for row in mobile_records:
@@ -31,7 +31,7 @@ def groups(teacher_id):
         connection = get_sql_connection()
         cursor = connection.cursor()
         postgre_sql_select_query = 'SELECT id, "group"  FROM public.schedule WHERE teacher_id=%s'
-        print(postgre_sql_select_query)
+        #print(postgre_sql_select_query)
         cursor.execute(postgre_sql_select_query, (teacher_id,))
         mobile_records = cursor.fetchall()
         for row in mobile_records:

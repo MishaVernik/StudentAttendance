@@ -50,13 +50,13 @@ def home(request):
         all_groups = groups(teacher_id)
         st_groups = get_student_groups()
         for group in st_groups:
-            print(group)
+            ##print(group)
             all_groups.append(group)
         all_subjects = subjects_many(group_ids(teacher_id))
 
         all_groups = list(dict.fromkeys(all_groups))
         all_subjects = list(dict.fromkeys(all_subjects))
-        # print('-'*400)
+        # ##print('-'*400)
         return render(request, 'home_teacher.html',
                       dict(content=[len(st), ], students=st, json_st=json.dumps(json_st), groups=all_groups,
                            subjects=all_subjects, state=[2]))
@@ -71,9 +71,9 @@ def home(request):
 
 def convert_lst_to_dict(lst):
     res_dict = {}
-    print(lst)
+    ##print(lst)
     for cnt, el in enumerate(lst):
-        print(el, cnt)
+        ##print(el, cnt)
         el = el + '-' + str(cnt)
         res_dict[el] = cnt
     # res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
@@ -84,7 +84,7 @@ def convert_lst_to_dict(lst):
 def home_teacher(request):
     content = [' ']  # convert_lst_to_dict()
     st = count_number_os_students()
-    print('#' * 40)
+    #print('#' * 40)
     json_st = []
     for el in st:
         json_st.append(el.number)
@@ -96,7 +96,7 @@ def home_teacher(request):
     all_groups = groups(teacher_id)
     st_groups = get_student_groups()
     for group in st_groups:
-        print(group)
+        #print(group)
         all_groups.append(group)
 
     all_subjects = subjects_many(group_ids(teacher_id))

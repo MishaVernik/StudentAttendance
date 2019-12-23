@@ -12,7 +12,7 @@ from Attendance.context.sql_connection import get_sql_connection
 def get_teachers_location(request):
     # get teachers Id
     teacher_id = 0
-    print(request.POST['email'])
+    #print(request.POST['email'])
     try:
         connection = get_sql_connection()
         cursor = connection.cursor()
@@ -37,11 +37,11 @@ def get_teachers_location(request):
                            teachers_id, "date", latitude, longitude, groups, subject, semester)
                             VALUES (%s, %s, %s, %s, %s, %s, %s);
                               '''
-        print(request.POST.getlist('group[]'))
+        #print(request.POST.getlist('group[]'))
         groups = ','.join(request.POST.getlist('groups[]'))
-        print('-' * 50)
-        print(groups)
-        print('-' * 50)
+        #print('-' * 50)
+        #print(groups)
+        #print('-' * 50)
         record_tuple = (teacher_id, datetime.now(), request.POST['latitude'], request.POST['longitude'],
                         groups, request.POST.get('subject'), int(str(request.POST.get('semester')).split()[1]))
         cursor.execute(create_table_query, record_tuple)
@@ -58,7 +58,7 @@ def get_teachers_location(request):
 
 def get_students_location(request):
     # get teachers Id
-    print(request.user)
+    #print(request.user)
     student_id = get_students_id(str(request.user))
     student_arr = []
 
@@ -88,7 +88,7 @@ def get_students_location(request):
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL getStudentsLocation connection is closed")
+        #print("PostgreSQL getStudentsLocation connection is closed")
     # Check with date now
     # Check location difference between
     present = datetime.now()

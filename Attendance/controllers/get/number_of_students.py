@@ -87,8 +87,8 @@ class Student(JSONEncoder):
 def count_number_os_students():
     dates = last_teachers_date()
     groups = dates[2]
-    print(dates)
-    print(groups)
+    #print(dates)
+    #print(groups)
     students = []
     try:
         connection = get_sql_connection()
@@ -99,17 +99,17 @@ def count_number_os_students():
                                     'st.student_id=att.student_id AND att.date::timestamp  BETWEEN  %s::timestamp  ' \
                                     'AND  ' \
                                     '%s::timestamp  AND  %s LIKE ' + '\'%%\' ' + '|| st."group" || ' + '\'%%\'; '
-        print(dates[1])
+        #print(dates[1])
         record_tuple = (dates[0], dates[1], groups)
         cursor.execute(postgres_sql_select_query, record_tuple)
 
         mobile_records = cursor.fetchall()
         number_of_students = 0
 
-        print('^' * 40)
-        print(mobile_records)
-        print('^' * 40)
-        print(postgres_sql_select_query)
+        #print('^' * 40)
+        #print(mobile_records)
+        #print('^' * 40)
+        #print(postgres_sql_select_query)
         for row in mobile_records:
             st = Student()
             st.number = number_of_students + 1
@@ -129,5 +129,5 @@ def count_number_os_students():
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL count_number_os_students connection is closed")
+        #print("PostgreSQL count_number_os_students connection is closed")
     return students

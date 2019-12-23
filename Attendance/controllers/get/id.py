@@ -11,7 +11,7 @@ def get_students_id(user):
         postgre_sql_select_query = "SELECT student_id, username FROM public.students WHERE username=%s"
         cursor.execute(postgre_sql_select_query, (user,))
         mobile_records = cursor.fetchall()
-        print(mobile_records)
+        #print(mobile_records)
         for row in mobile_records:
             student_id = row[0]
     except (Exception, psycopg2.DatabaseError) as error:
@@ -40,5 +40,5 @@ def get_teachers_id(username):
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL  TEACHERS connection is closed")
+        #print("PostgreSQL  TEACHERS connection is closed")
     return teachers_id

@@ -28,9 +28,9 @@ def add_schedule(teacher_id, groups, name):
 
         cursor = connection.cursor()
         arr_groups = groups.split(',')
-        print(arr_groups)
+        #print(arr_groups)
         for group in arr_groups:
-            print(group)
+            #print(group)
             create_table_query = ''' INSERT INTO public.schedule(
                                teacher_id, "group", name)
                                 VALUES (%s, %s, %s);

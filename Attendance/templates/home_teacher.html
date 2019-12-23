@@ -8,8 +8,16 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://maps.google.com/maps/api/js?sensor=false"
           type="text/javascript"></script>
- <div id="map" style="width: 500px; height: 400px;"></div>
 
+
+{% if state|length == 1  %}
+ <div id="map" style="width: 500px; height: 400px;"></div>
+{% elif state|length == 2 %}
+<form method="POST" action="{% url 'home' %}">
+   {% csrf_token %}
+    <button type="submit" class="btn btn-info" type="submit">Back</button>
+</form>
+{% endif %}
 <div class="alert alert-{{ message.tags }}">
    {{ message }}
 </div>
@@ -58,7 +66,7 @@
           dataType: 'html',
           success: function (data) {
             // alert(1);
-            var received = JSON.parse(JSON.stringify(data));
+            // var received = JSON.parse(JSON.stringify(data));
              $("html").html(data);
             //console.log(data);
             if (data.is_taken) {
@@ -98,7 +106,6 @@
             },
           dataType: 'html',
            error: function (jqXHR, exception) {
-           alert(1);
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
@@ -115,11 +122,20 @@
             } else {
                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
             }
-            // $('#post').html(msg);
-            alert(msg);
+              $('#post').html(msg);
+           // alert(msg);
         },
           success: function (data) {
-            alert(2);
+
+            var a = document.createElement('a');
+            var url = window.URL.createObjectURL(data);
+            a.href = url;
+            a.download = 'schedule.csv';
+            document.body.append(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+
             if (data.is_taken) {
               alert(data.error_message);
             }
@@ -207,8 +223,10 @@
       })(marker, i));
     }
 </script>
+{% if state|length == 1  %}
 <button type="submit" class="btn btn-info" onclick="getLocation()">Start Lecture</button>
 <button type="submit" class="btn btn-warning" onclick="finishLecture()">Finish Lecture</button>
+
 <h4><br>
 <table>
     {% for elem in content %}
@@ -216,6 +234,7 @@
     {% endfor %}
 </table>
 </h4>
+
 <table>
     <tr>
         <td>
@@ -245,6 +264,7 @@
     </tr>
 </table>
 <!-- Show table -->
+
 <br>
 <table>
     <tr>
@@ -268,6 +288,8 @@
         </td>
     </tr>
 </table>
+
+{% endif %}
 <!-- Show table-->
 <br>
     <table class="table table-sm"  border="2">

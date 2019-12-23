@@ -7,7 +7,7 @@ from Attendance.context.sql_connection import get_sql_connection
 def all_dates_t(teacher_id, subject, semester, groups):
     global connection, cursor
     dates = []
-    print(teacher_id, subject)
+    #print(teacher_id, subject)
     try:
         connection = get_sql_connection()
         cursor = connection.cursor()
@@ -27,7 +27,7 @@ def all_dates_t(teacher_id, subject, semester, groups):
         cursor.close()
         connection.close()
 
-    print('-'*40)
-    print(dates)
-    print('-' * 40)
+    #print('-'*40)
+    #print(dates)
+    #print('-' * 40)
     return dates

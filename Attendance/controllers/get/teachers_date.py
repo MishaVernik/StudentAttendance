@@ -12,7 +12,7 @@ def last_teachers_date():
         cursor = connection.cursor()
         postgre_sql_select_query = "SELECT * from public.teachers_coordinates ORDER BY date DESC LIMIT 1;"
         cursor.execute(postgre_sql_select_query)
-        print("Selecting ifStudentOnTheLecture rows from mobile table using cursor.fetchall")
+        #print("Selecting ifStudentOnTheLecture rows from mobile table using cursor.fetchall")
         mobile_records = cursor.fetchall()
         date_plus20 = datetime.now()
         date_original = datetime.now()
@@ -27,5 +27,5 @@ def last_teachers_date():
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL last_teachers_date connection is closed")
+        #print("PostgreSQL last_teachers_date connection is closed")
     return ["", "", ""]

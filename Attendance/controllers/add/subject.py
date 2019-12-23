@@ -16,12 +16,12 @@ def index(request):
     all_groups = groups(teacher_id)
     st_groups = get_student_groups()
     for group in st_groups:
-        print(group)
+        #print(group)
         all_groups.append(group)
     all_subjects = subjects_many(group_ids(teacher_id))
-    print("-" * 40)
-    print(all_subjects)
-    print("-" * 40)
+    #print("-" * 40)
+    #print(all_subjects)
+    #print("-" * 40)
 
     all_groups = list(dict.fromkeys(all_groups))
     all_subjects = list(dict.fromkeys(all_subjects))
@@ -32,7 +32,7 @@ def index(request):
 
 def insert_into_subjects(schedule_id, subject, semester):
     global cursor, connection
-    print('INSERTING SUBJECTS')
+    #print('INSERTING SUBJECTS')
     try:
         connection = get_sql_connection()
         cursor = connection.cursor()
@@ -45,7 +45,7 @@ def insert_into_subjects(schedule_id, subject, semester):
         cursor.execute(create_table_query, record_tuple)
         connection.commit()
     except (Exception, psycopg2.DatabaseError) as error:
-        print("Error while doing smth in PostgreSQL", error)
+         print("Error while doing smth in PostgreSQL", error)
     finally:
         # closing database connection.
         cursor.close()
@@ -57,7 +57,7 @@ def add_subject(request):
     Функция отображения для домашней страницы сайта.
     """
     global cursor, connection
-    print(request.user)
+    #print(request.user)
     semester = str(request.POST.get('semester')).split()
     subject = request.POST.get('subject')
     teacher_id = get_teachers_id(str(request.user))

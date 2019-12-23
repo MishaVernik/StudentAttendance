@@ -19,9 +19,9 @@ def index(request):
         all_groups.append(group)
 
     all_subjects = subjects_many(group_ids(teacher_id))
-    print("-" * 40)
-    print(all_subjects)
-    print("-" * 40)
+    #print("-" * 40)
+    #print(all_subjects)
+    #print("-" * 40)
 
     all_groups = list(dict.fromkeys(all_groups))
     all_subjects = list(dict.fromkeys(all_subjects))
@@ -42,12 +42,12 @@ def get_schedule_id(teacher_id, group, semester):
         for row in mobile_records:
             return row[0]
     except (Exception, psycopg2.DatabaseError) as error:
-        print("Error get_schedule_id while doing smth in PostgreSQL", error)
+         print("Error get_schedule_id while doing smth in PostgreSQL", error)
     finally:
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL ifStudentOnTheLecture connection is closed")
+        #print("PostgreSQL ifStudentOnTheLecture connection is closed")
     return -1
 
 
@@ -63,12 +63,12 @@ def get_student_groups():
         for row in mobile_records:
             all_groups.append(row[0])
     except (Exception, psycopg2.DatabaseError) as error:
-        print("Error get_student_groups while doing smth in PostgreSQL", error)
+         print("Error get_student_groups while doing smth in PostgreSQL", error)
     finally:
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL get_student_groups connection is closed")
+        #print("PostgreSQL get_student_groups connection is closed")
     return all_groups
 
 
@@ -77,7 +77,7 @@ def add_group(request):
 
     """
     global connection, cursor
-    print(request.user)
+    #print(request.user)
     semester = str(request.POST.get('semester')).split()
     subject = request.POST.get('subject')
     teacher_id = get_teachers_id(str(request.user))
@@ -98,7 +98,7 @@ def add_group(request):
                 cursor.execute(create_table_query, record_tuple)
                 connection.commit()
         except (Exception, psycopg2.DatabaseError) as error:
-            print("Error while doing smth in PostgreSQL", error)
+             print("Error while doing smth in PostgreSQL", error)
         finally:
             # closing database connection.
             cursor.close()

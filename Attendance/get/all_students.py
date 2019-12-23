@@ -11,7 +11,7 @@ def all_students_s(groups):
          - array of students data set
             [student_id,first_name, second_name, group]            
     '''
-    print(groups)
+    #print(groups)
     students = []
     try:
         connection = get_sql_connection()
@@ -32,7 +32,7 @@ def all_students_s(groups):
         # closing database connection.
         cursor.close()
         connection.close()
-    print('-' * 40)
-    print(students)
-    print('-' * 40)
+    #print('-' * 40)
+    #print(students)
+    #print('-' * 40)
     return students

@@ -11,7 +11,7 @@ def students_group(user):
         postgre_sql_select_query = 'SELECT "group", username FROM public.students WHERE username=%s'
         cursor.execute(postgre_sql_select_query, (user,))
         mobile_records = cursor.fetchall()
-        print(mobile_records)
+        #print(mobile_records)
         for row in mobile_records:
             _group = row[0]
     except (Exception, psycopg2.DatabaseError) as error:

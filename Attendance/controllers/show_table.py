@@ -13,7 +13,6 @@ from Attendance.context.sql_connection import get_sql_connection
 from datetime import datetime, date, time, timedelta
 
 
-
 def index(request):
     """
     Функция отображения для домашней страницы сайта.
@@ -25,9 +24,9 @@ def index(request):
         all_groups.append(group)
 
     all_subjects = subjects_many(group_ids(teacher_id))
-    print("-" * 40)
-    print(all_subjects)
-    print("-" * 40)
+    #print("-" * 40)
+    #print(all_subjects)
+    #print("-" * 40)
 
     all_groups = list(dict.fromkeys(all_groups))
     all_subjects = list(dict.fromkeys(all_subjects))
@@ -82,24 +81,24 @@ def show_table(request):
 
     """
     # p.2
-    # print('#'*40)
-    # print(request.user)
+    # #print('#'*40)
+    # #print(request.user)
     semester = str(request.POST.get('semester')).split()
     subject = str(request.POST.get('subject'))
     lst_tmp = request.POST.getlist('groups[]')
-    # print(subject)
+    # #print(subject)
     lst_groups = ','.join(lst_tmp)
-    # print(lst_groups)
+    # #print(lst_groups)
     # p.3
     teacher_id = get_teachers_id(str(request.user))
     # p.4
     from Attendance.get.all_teachers import all_dates_t
     all_teacher_dates = all_dates_t(teacher_id=teacher_id, subject=subject, semester=semester, groups=lst_groups)
-    # print('all_teacher_dates : ', all_teacher_dates)
+    # #print('all_teacher_dates : ', all_teacher_dates)
     # p.5
     from Attendance.get.all_students import all_students_s
     all_students = all_students_s(groups=lst_groups)
-    # print('all_students : ', all_students)
+    # #print('all_students : ', all_students)
     general_table = []
     students_table = {}
     cols = ['Name', 'Group']
@@ -110,8 +109,8 @@ def show_table(request):
     for lecture in all_teacher_dates:
         if intersection_between_2_groups_bool(group1=lecture[1], group2=lst_groups):
             # adds new date to the 'cols'
-            cols.append(lecture[0])
-            print('cols:', cols)
+
+            #print('cols:', cols)
             current_students_on_lecture = students_on_lecture(lecture[0], lecture[1])
             groups_2 = intersection_between_2_groups_array(lecture[1], lst_groups)
             is_changed = False
@@ -122,6 +121,7 @@ def show_table(request):
                         if not is_changed:
                             is_changed = True
                             current += 1
+                            cols.append(lecture[0])
 
             for student, arr in students_table.items():
                 if len(arr) != current:
@@ -129,7 +129,7 @@ def show_table(request):
 
     all_groups = groups(teacher_id)
     # st_groups = get_student_groups()
-    print('Printing table...')
+    #print('#printing table...')
     # import csv
     # response = HttpResponse(content_type='text/csv')
     # response['Content-Disposition'] = 'attachment; filename="attendance.csv"'
@@ -138,16 +138,16 @@ def show_table(request):
     # writer = csv.writer(response, delimiter=',')
     # writer.writerow(cols)
     # for student, attendance in students_table.items():
-    #     print(student, attendance)
+    #     #print(student, attendance)
     #     tmp = attendance
     #     tmp.insert(0, student)
     #     writer.writerow(tmp)
-    #return response
+    # return response
     all_subjects = subjects_many(group_ids(teacher_id))
 
     return render(request, 'home_teacher.html',
-                              dict(students=[], groups=all_groups,
-                                   subjects=all_subjects, cols=cols, rows=students_table, state=[0, 1]))
+                  dict(students=[], groups=all_groups,
+                       subject=all_subjects, cols=cols, rows=students_table, state=[0, 1]))
 
 
 def students_on_lecture(date, st_groups):
@@ -155,8 +155,8 @@ def students_on_lecture(date, st_groups):
     global cursor, connection
     date = datetime.strptime(date.split('.')[0], '%Y-%m-%d %H:%M:%S')
     dates = [date, date + timedelta(minutes=20)]
-    print(dates)
-    print(st_groups)
+    #print(dates)
+    #print(st_groups)
     students = []
     try:
         connection = get_sql_connection()
@@ -167,17 +167,17 @@ def students_on_lecture(date, st_groups):
                                     'st.student_id=att.student_id AND att.date::timestamp  BETWEEN  %s::timestamp  ' \
                                     'AND  ' \
                                     '%s::timestamp  AND  %s LIKE ' + '\'%%\' ' + '|| st."group" || ' + '\'%%\'; '
-        print(dates[1])
+        #print(dates[1])
         record_tuple = (dates[0], dates[1], st_groups)
         cursor.execute(postgres_sql_select_query, record_tuple)
 
         mobile_records = cursor.fetchall()
         number_of_students = 0
 
-        print('^' * 40)
-        print(mobile_records)
-        print('^' * 40)
-        print(postgres_sql_select_query)
+        #print('^' * 40)
+        #print(mobile_records)
+        #print('^' * 40)
+        #print(postgres_sql_select_query)
         for row in mobile_records:
             st = Student()
             st.number = number_of_students + 1
@@ -197,7 +197,7 @@ def students_on_lecture(date, st_groups):
         # closing database connection.
         cursor.close()
         connection.close()
-        print("PostgreSQL count_number_os_students connection is closed")
+        #print("PostgreSQL count_number_os_students connection is closed")
     return students
 
 
