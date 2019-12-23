@@ -56,7 +56,7 @@
          semester = eSemester.options[eSemester.selectedIndex].text;
          var eSubject = document.getElementById("subject");
          subject = eSubject.options[eSubject.selectedIndex].text;
-         alert(3);
+         //alert(3);
        $.ajax({
           headers: { "X-CSRFToken": token },
           url: "/showTable/",
@@ -97,7 +97,7 @@
          semester = eSemester.options[eSemester.selectedIndex].text;
          var eSubject = document.getElementById("subject");
          subject = eSubject.options[eSubject.selectedIndex].text;
-         alert(3);
+         //alert(3);
        $.ajax({
           headers: { "X-CSRFToken": token },
           url: "/importToCSV/",
@@ -130,7 +130,7 @@
            // alert(msg);
         },
           success: function (data) {
-            alert("FILE");
+            //alert("FILE");
             $("a#download").attr({
             "download" :  "schedule.csv",
             "href" : "data:text/csv," + data /* data[0] */
