@@ -10,6 +10,8 @@
           type="text/javascript"></script>
 
 
+
+<a id="download" download="" href="">download</a>
 {% if state|length == 1  %}
  <div id="map" style="width: 500px; height: 400px;"></div>
 {% elif state|length == 2 %}
@@ -126,15 +128,19 @@
            // alert(msg);
         },
           success: function (data) {
-
-            var a = document.createElement('a');
-            var url = window.URL.createObjectURL(data);
-            a.href = url;
-            a.download = 'schedule.csv';
-            document.body.append(a);
-            a.click();
-            a.remove();
-            window.URL.revokeObjectURL(url);
+            alert("FILE");
+            $("a#download").attr({
+            "download" :  "schedule.csv",
+            "href" : "data:text/csv," + data /* data[0] */
+            }).get(0).click();
+            //var a = document.createElement('a');
+            //var url = window.URL.createObjectURL(data);
+            //a.href = url;
+            //a.download = 'schedule.csv';
+            //document.body.append(a);
+            //a.click();
+            //a.remove();
+            //window.URL.revokeObjectURL(url);
 
             if (data.is_taken) {
               alert(data.error_message);

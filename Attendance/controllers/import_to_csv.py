@@ -84,11 +84,11 @@ def download_csv(request):
     #print('#printing table...')
     import csv
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="attendance.csv"'
-    response.write(u'\ufeff'.encode('utf8'))
+    response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
 
+    response.write(u'\ufeff'.encode('utf8'))
     # with open('innovators.csv', 'w', newline='') as file:
-    writer = csv.writer(response, delimiter=',')
+    writer = csv.writer(response, delimiter=';')
     writer.writerow(cols)
     for student, attendance in students_table.items():
         #print(student, attendance)
